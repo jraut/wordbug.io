@@ -5,7 +5,7 @@ export interface Character {
     name: string
     description: string[]
 }
-export const Characters: React.FC<{}> = () => {
+export const Characters: React.FC<Character> = () => {
     const characters = CHARACTER_DATA
     return (<div><h1>Characters</h1>
         {characters.map(char => {
