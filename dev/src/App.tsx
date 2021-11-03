@@ -6,7 +6,7 @@ import { Description } from './components/Description';
 import colors from './fixtures/wordbug-hahmojen-varit.png'
 import { CHARACTER_COLORS } from './fixtures/characters';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Description header="The game of Wordbug" content={
