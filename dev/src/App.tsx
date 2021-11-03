@@ -3,16 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import { Characters } from './components/Characters';
 import { GAME_DESCRIPTION, HISTORY, WORLD_DESCRIPTION } from './fixtures/game';
+import { Description } from './components/Description';
 
 function App() {
   return (
     <div className="App">
-      <h1>The game of Wordbug</h1>
-      <p>{GAME_DESCRIPTION}</p>
-      <h1>The world of Gubdrow</h1>
-      <p>{WORLD_DESCRIPTION}</p>
-      <h1>History</h1>
-      <p>{HISTORY.map(s => <p>{s}</p>)}</p>
+      <Description header="The game of Wordbug" content={
+        GAME_DESCRIPTION} />
+      <Description header="The world of Gubdrow" content={
+        WORLD_DESCRIPTION} />
+      <Description header="History" content={
+        HISTORY} />
       <Characters />
     </div>
   );
