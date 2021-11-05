@@ -33,6 +33,7 @@ export const Characters: React.FC = () => {
         return (
           <div key={char.name}>
             <h2>{char.name}</h2>
+            <p>Alignment: {char.alignment}</p>
             <h3>Colours</h3>
             <Palette {...char.colors} />
             <h3>History</h3>
