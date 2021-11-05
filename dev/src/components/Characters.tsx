@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { DRAFT_CHARACTER_DATA } from '../fixtures/characters'
+import { CHARACTER_DATA } from '../fixtures/characters'
 import { Palette } from './Palette'
 
 export interface Palette {main: string, secondaries: string[]}
@@ -10,20 +10,11 @@ export interface Character {
   alignment: 'light' | 'dark'
 }
 
-export interface DraftCharacter extends Omit<Character, 'colors' | 'alignment'> {
-  name: string
-  description: string[]
-  colorsLight: {main: string, secondaries: string[]}
-  colorsDark: {main: string, secondaries: string[]}
-}
-
-const CharactersColorDisplay: React.FC<{ characters: DraftCharacter[] }> = ({ characters }) => {
+const CharactersColorDisplay: React.FC<{ characters: Character[] }> = ({ characters }) => {
   const swatches: ReactElement[] = []
   { characters.forEach(
-    ({ name, colorsLight, colorsDark }) => {
-      swatches.push(<div style={{ background: colorsLight.main }}>{colorsLight.main}&nbsp;{name} Light</div>)
-      swatches.push(<div style={{ background: colorsDark.main }}>{colorsDark.main}&nbsp;{name} Dark</div>)
-      
+    ({ name, colors }) => {
+      swatches.push(<div style={{ background: colors.main }}>{name}:{' '}{colors.main}</div>)
     }
     , []) }
   return (<div>
@@ -34,7 +25,7 @@ const CharactersColorDisplay: React.FC<{ characters: DraftCharacter[] }> = ({ ch
 }
 
 export const Characters: React.FC = () => {
-  const characters = DRAFT_CHARACTER_DATA
+  const characters = CHARACTER_DATA
   return (
     <div>
       <h1>Characters</h1>
@@ -42,13 +33,10 @@ export const Characters: React.FC = () => {
         return (
           <div key={char.name}>
             <h2>{char.name}</h2>
-
-            <h3>Light colours</h3>
-            <Palette {...char.colorsLight} />
-            <h3>Dark colours</h3>
-            <Palette {...char.colorsDark} />
+            <h3>Colours</h3>
+            <Palette {...char.colors} />
             <h3>History</h3>
-            <div>
+            <div> 
               {char.description.map((d, i) => (
                 <p
                   key={i}
