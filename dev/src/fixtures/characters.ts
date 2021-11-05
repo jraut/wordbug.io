@@ -40,7 +40,7 @@ export const CHARACTER_DATA: DraftCharacter[] = [
       `Mira had to learn to cope with his physical conditions. He went through many hardships but overcame them with technical solutions. The people in his home town were not accepting him at first, since he was not able to do networking anymore, having lost his mobility and charisma. As his physical abilities were damaged, he developed his brain instead. He learnt fast and soon became smarter than his peers. His perseverance and technical brilliance earned him the respect of his fellow citizens.`,
     ],
     colorsDark: {
-      main: '#007788',
+      main: '#005891',
       secondaries: ['#48484b', '#c8393b', '#50590d'],
     },
     colorsLight: {
@@ -56,11 +56,11 @@ export const CHARACTER_DATA: DraftCharacter[] = [
       `BEFINED/DONE`,
     ],
     colorsDark: {
-      main: '#3D5588',
+      main: '#94679C',
       secondaries: ['#582b3a', '#a76225', '#009e8f'],
     },
     colorsLight: {
-      main: '#eaf0f5',
+      main: '#dbdddf',
       secondaries: ['#ec7faa', '#c49d69', '#f2dddd'],
     },
   },
