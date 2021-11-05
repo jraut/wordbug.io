@@ -27,7 +27,7 @@ export const Characters: React.FC = () => {
             <h2>{char.name}</h2>
             <Palette {...char.colorsLight} />
             <Palette {...char.colorsDark} />
-            <p>
+            <div>
               {char.description.map((d, i) => (
                 <p
                   key={i}
@@ -42,7 +42,7 @@ export const Characters: React.FC = () => {
                   {d}
                 </p>
               ))}
-            </p>
+            </div>
           </div>
         )
       })}
