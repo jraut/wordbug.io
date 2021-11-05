@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { CHARACTER_DATA } from '../fixtures/characters'
+import { Alignment, CHARACTER_DATA } from '../fixtures/characters'
 import { Palette } from './Palette'
 
 export interface Palette {main: string, secondaries: string[]}
@@ -7,7 +7,7 @@ export interface Character {
   name: string
   description: string[]
   colors: Palette
-  alignment: 'light' | 'dark'
+  alignment: Alignment
 }
 
 const CharactersColorDisplay: React.FC<{ characters: Character[] }> = ({ characters }) => {
