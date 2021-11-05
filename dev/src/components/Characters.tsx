@@ -25,8 +25,12 @@ export const Characters: React.FC = () => {
         return (
           <div key={char.name}>
             <h2>{char.name}</h2>
+
+            <h3>Light colours</h3>
             <Palette {...char.colorsLight} />
+            <h3>Dark colours</h3>
             <Palette {...char.colorsDark} />
+            <h3>History</h3>
             <div>
               {char.description.map((d, i) => (
                 <p
