@@ -65,16 +65,3 @@ export const CHARACTER_DATA: DraftCharacter[] = [
     },
   },
 ]
-
-export const CHARACTER_COLORS = [
-  // good
-  { main: '#be3819', secondaries: ['#142f0f', '#2e4a5b', '#94679C'] },
-  { main: '#4a7518', secondaries: ['#199CD2', '#8270a3', '#d52f25'] },
-  { main: '#007788', secondaries: ['#48484b', '#c8393b', '#50590d'] },
-  { main: '#3D5588', secondaries: ['#582b3a', '#a76225', '#e1f0e8'] },
-  // Bad
-  { main: '#d2a785', secondaries: ['#e1f0e8', '#eaf0f5', '#c476aa'] },
-  { main: '#d4e19e', secondaries: ['#f5faf7', '#44b3df', '#5B4998'] },
-  { main: '#7bc6c0', secondaries: ['#5b5b5e', '#ea949d', '#f2edbe'] },
-  { main: '#898b8e', secondaries: ['#ec7faa', '#c49d69', '#e1f0e8'] },
-]
