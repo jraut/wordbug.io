@@ -23,13 +23,14 @@ export const Characters: React.FC = () => {
       <h1>Characters</h1>
       {characters.map((char) => {
         return (
-          <div>
+          <div key={char.name}>
             <h2>{char.name}</h2>
             <Palette {...char.colorsLight} />
             <Palette {...char.colorsDark} />
             <p>
-              {char.description.map((d) => (
+              {char.description.map((d, i) => (
                 <p
+                  key={i}
                   style={{
                     textAlign: 'left',
                     maxWidth: '18em',
