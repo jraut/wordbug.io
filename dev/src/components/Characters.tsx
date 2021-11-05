@@ -1,10 +1,21 @@
 import React from 'react'
 import { CHARACTER_DATA } from '../fixtures/characters'
+import { Palette } from './Palette'
 
+export interface Palette {main: string, secondaries: string[]}
 export interface Character {
   name: string
   description: string[]
+  colors: Palette
 }
+
+export interface DraftCharacter extends Omit<Character, 'colors'> {
+  name: string
+  description: string[]
+  colorsLight: {main: string, secondaries: string[]}
+  colorsDark: {main: string, secondaries: string[]}
+}
+
 export const Characters: React.FC = () => {
   const characters = CHARACTER_DATA
   return (
@@ -14,6 +25,8 @@ export const Characters: React.FC = () => {
         return (
           <div>
             <h2>{char.name}</h2>
+            <Palette {...char.colorsLight} />
+            <Palette {...char.colorsDark} />
             <p>
               {char.description.map((d) => (
                 <p
