@@ -1,6 +1,6 @@
 import { DraftCharacter } from '../components/Characters'
 
-export const CHARACTER_DATA: DraftCharacter[] = [
+export const DRAFT_CHARACTER_DATA: DraftCharacter[] = [
   {
     name: 'Rugo',
     description: [
