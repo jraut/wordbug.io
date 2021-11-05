@@ -34,8 +34,8 @@ export const Description: React.FC<Description> = ({
       ) : (
         <div>
           {" "}
-          {content.map((s) => (
-            <p>{s}</p>
+          {content.map((s, i) => (
+            <p key={i}>{s}</p>
           ))}
         </div>
       )}
