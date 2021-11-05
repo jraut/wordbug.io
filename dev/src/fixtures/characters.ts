@@ -1,9 +1,13 @@
 import { Character } from '../components/Characters'
 
+export type Family = 'wolf' | 'squirrel' | 'lizard' | 'mystery'
+export type Alignment = 'light' | 'dark'
+
 export const CHARACTER_DATA: Character[] = [
   {
     name: 'Saash',
     alignment: 'dark',
+    family: 'wolf',
     description: [
       `Saash is a humongous wolf who loves getting intoxicated and playing musical instruments. He claims to be from Northern Wilds but actually he has no home - he is not able to return to the place his forgotten memories used to call his own. He was outcast after the great wars for the deeds he had done. Altough much of his atrocities were only to protect the innocent, there is no settlement to the past despair. Now, he believes that all sentient beings deserve respect and dignity - especially the weak.`,
       `All his life he wanted to be a warrior, but instead he turned out to be a slave of his enemies. After the war he was put under a spell and kept as a pet for his new master. After several years of being a slave, Saash began to have vivid dreams about his past and what had really happened. Ultimately he broke out and set his opressors to their place.`,
@@ -17,6 +21,7 @@ export const CHARACTER_DATA: Character[] = [
   {
     name: 'Rugo',
     alignment: 'light',
+    family: 'wolf',
     description: [
       `Rugo is a wolf. He comes from the Northern Land of agile hunters who are known for their honesty. His parents were the rulers of the nation before the invasion of the bugs and the great corruption. Rugo had to go through a lot to survive. He wants to provide a safe future for everyone.`,
       `Rugo was taught to hunt by his father. As he was growing up, he realized that something was wrong with the world. The flowers began to wither, the bugs began to multiply and the balance of nature was disrupted. Rugo decided to find out what was happening. He went to explore the world.`,
@@ -30,6 +35,7 @@ export const CHARACTER_DATA: Character[] = [
   {
     name: 'Aerith',
     alignment: 'dark',
+    family: 'squirrel',
     description: [
       `Aerith is an old squirrel lady who used to be a sorceress, but now she is retired and spends her time as a bookshop owner. She comes from the Mystic Nation which is known for their knowledge of the worlds of beyond. She is one of the oldest inhabitants of Gubdrow, she is respected and feared by everyone. `,
       `Having gathered an unimaginable wealth, she greatly helped in rebuilding the capital city and the surrounding areas of the kingdom. But all her treasures can't make her happy - she is searching for something she has lost long ago... Her only purpose in life is to find the thing that would bring joy back to her heart. Will she find it? And if she does, will she know what to do with it?`,
@@ -43,6 +49,7 @@ export const CHARACTER_DATA: Character[] = [
   {
     name: 'Celso',
     alignment: 'light',
+    family: 'squirrel',
     description: [
       `Celso is a squirrel. He comes from the Mystic Nation which is known for their knowledge of the worlds of beyond. He lost his parents when he was young. His brother was responsible for his upbringing and he brought him to the nation of his ancestors. They had to part ways when his brother was needed to defend the nation. He always felt guilty for not being able to help his brother in time, but he knew he was doing what was best for him. Celso was lucky that there were many wise scholars there who took him in.`,
       `After having mastered his studies, Celso decided to bring peace to his nation. He used his psychic powers to help all the families who were suffering from the loss of proper words for their loved ones. He started using the forgotten old knowledge to reduce the confusion. The nation was shocked at first, but once they found out that they could use this new method to bring back understanding between each other. This new method worked and restored happiness to all of them. `,
@@ -55,6 +62,7 @@ export const CHARACTER_DATA: Character[] = [
   {
     name: 'Theodorus',
     alignment: 'dark',
+    family: 'lizard',
     description: [
       `Theodorus is a lizard. He comes from the Nation of Traders who are sociable and well-networked. He was not treated well when he grew up. He had to learn to cope from early on. His technical skills are beyond comprehensible. He was cast out from his society. After the thought he had lost everything, the bugs started their invasion and he decided to make peace with his surroundings.`,
       `One day when Theodorus was a child, he found a nice place to make a camp. He was looking for firewood to start a fire. Suddenly, a very strong wind came, and he lost his balance. He fell down the cliff. After the fall, he fainted. A couple of days later, when he awoke, he noticed that he has been hurt badly. He had many broken bones. His right hand was completely crushed. Theodorus, however, had a very strong will. He took his crushed hand and got it replaced by a mechanical device he had been building. Initially recovery was slow and rebuilding the surroundings cumbersome but slowly Theodorus got back on his feet.`,
@@ -68,6 +76,7 @@ export const CHARACTER_DATA: Character[] = [
   {
     name: 'Mira',
     alignment: 'light',
+    family: 'lizard',
     description: [
       `Mira is a lizard. He comes from the Nation of Traders who are sociable and well-networked. He was raised well and had a happy youth. He has become the pinnacle of his society. His loyal subjects see him as a god-like being because of his heroic acts. He has been able to save his people from many dangers. `,
       `His biggest quest was abolishing the Spirit of Malice from the nearby lands, as was foreseen by the elders. One day, Mira rescued a lost princess of the nation of Lanberk who was stranded outside of his city and he brought him back to the city.  Mira's intelligence, determination and willingness to sacrifice himself in order to save the princess impressed them very much. So they gave him anything and everything he ever wished - the hand of the princess.`,
@@ -80,6 +89,7 @@ export const CHARACTER_DATA: Character[] = [
   {
     name: 'Mystery 1',
     alignment: 'dark',
+    family: 'mystery',
     description: [`TO`, `BE`, `BEFINED/DONE`],
     colors: {
       main: '#94679C',
@@ -88,7 +98,8 @@ export const CHARACTER_DATA: Character[] = [
   },
   {
     name: 'Mystery 2',
-    alignment: 'dark',
+    alignment: 'light',
+    family: 'mystery',
     description: [`TO`, `BE`, `BEFINED/DONE`],
     colors: {
       main: '#dbdddf',
