@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { CHARACTER_DATA } from '../fixtures/characters'
+import { DRAFT_CHARACTER_DATA } from '../fixtures/characters'
 import { Palette } from './Palette'
 
 export interface Palette {main: string, secondaries: string[]}
@@ -7,9 +7,10 @@ export interface Character {
   name: string
   description: string[]
   colors: Palette
+  alignment: 'light' | 'dark'
 }
 
-export interface DraftCharacter extends Omit<Character, 'colors'> {
+export interface DraftCharacter extends Omit<Character, 'colors' | 'alignment'> {
   name: string
   description: string[]
   colorsLight: {main: string, secondaries: string[]}
@@ -33,7 +34,7 @@ const CharactersColorDisplay: React.FC<{ characters: DraftCharacter[] }> = ({ ch
 }
 
 export const Characters: React.FC = () => {
-  const characters = CHARACTER_DATA
+  const characters = DRAFT_CHARACTER_DATA
   return (
     <div>
       <h1>Characters</h1>
