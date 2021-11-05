@@ -8,7 +8,7 @@ interface Palette {
 export const Palette: React.FC<Palette> = ({ main, secondaries }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div style={{ background: main }}>{main}&nbsp;</div>
+      <div style={{ background: main, padding: '1em', marginBottom: '0.25em' }}>{main}&nbsp;</div>
       {secondaries.map((secColorHex) => (
         <div style={{ background: secColorHex }} key={secColorHex}>{secColorHex} &nbsp;</div>
       ))}
