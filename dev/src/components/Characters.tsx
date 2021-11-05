@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { CHARACTER_DATA } from '../fixtures/characters'
 import { Palette } from './Palette'
 
@@ -14,6 +14,22 @@ export interface DraftCharacter extends Omit<Character, 'colors'> {
   description: string[]
   colorsLight: {main: string, secondaries: string[]}
   colorsDark: {main: string, secondaries: string[]}
+}
+
+const CharactersColorDisplay: React.FC<{ characters: DraftCharacter[] }> = ({ characters }) => {
+  const swatches: ReactElement[] = []
+  { characters.forEach(
+    ({ name, colorsLight, colorsDark }) => {
+      swatches.push(<div style={{ background: colorsLight.main }}>{colorsLight.main}&nbsp;{name} Light</div>)
+      swatches.push(<div style={{ background: colorsDark.main }}>{colorsDark.main}&nbsp;{name} Dark</div>)
+      
+    }
+    , []) }
+  return (<div>
+  <h2>Main colors of characters</h2>
+  {swatches}
+
+    </div>)
 }
 
 export const Characters: React.FC = () => {
@@ -50,6 +66,7 @@ export const Characters: React.FC = () => {
           </div>
         )
       })}
+      <CharactersColorDisplay characters={characters} />
     </div>
   )
 }
