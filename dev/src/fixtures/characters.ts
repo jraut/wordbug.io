@@ -48,7 +48,22 @@ export const CHARACTER_DATA: DraftCharacter[] = [
       secondaries: ['#5b5b5e', '#ea949d', '#f2edbe'],
     },
   },
-  
+  {
+    name: 'Mystery',
+    description: [
+      `TO`,
+      `BE`,
+      `BEFINED/DONE`,
+    ],
+    colorsDark: {
+      main: '#3D5588',
+      secondaries: ['#582b3a', '#a76225', '#009e8f'],
+    },
+    colorsLight: {
+      main: '#eaf0f5',
+      secondaries: ['#ec7faa', '#c49d69', '#f2dddd'],
+    },
+  },
 ]
 
 export const CHARACTER_COLORS = [
