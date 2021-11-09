@@ -44,9 +44,13 @@ export const Characters: React.FC = () => {
         {characters.map((char) => {
           return (
             <div key={char.name} className="p-4">
-              <div className="mx-auto flex flex-col space-y-4 p-2 rounded-s shadow-xl  bg-gray-300">
+              <div
+                className={`mx-auto flex flex-col space-y-4 p-2 rounded-s shadow-xl ${
+                  char.alignment === 'light' ? 'bg-gray-200' : 'bg-gray-400'
+                }`}
+              >
                 <div className="p-2 rounded-s shadow-sm items-center">
-                  <h2 className="text-xl font-large font-serif shadow-sm bg-gray-200">
+                  <h2 className="text-xl font-large font-serif shadow-sm bg-gray-300">
                     {char.name}
                   </h2>
                   <table className="text-left mx-auto pd-2">
