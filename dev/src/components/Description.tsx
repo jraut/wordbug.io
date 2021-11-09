@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
-type HeaderLevel = 1 | 2 | 3 | 4 | 5;
+type HeaderLevel = 1 | 2 | 3 | 4 | 5
 interface Description {
-  header?: string;
-  content: string | string[];
-  level?: HeaderLevel;
+  header?: string
+  content: string | string[]
+  level?: HeaderLevel
 }
 
 const Header: React.FC<{ level: HeaderLevel }> = ({ level, children }) => {

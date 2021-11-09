@@ -1,8 +1,8 @@
-import React from 'react';
-import './App.css';
-import { Characters } from './components/Characters';
-import { GAME_DESCRIPTION, HISTORY, WORLD_DESCRIPTION } from './fixtures/game';
-import { Description } from './components/Description';
+import React from 'react'
+import './App.css'
+import { Characters } from './components/Characters'
+import { GAME_DESCRIPTION, HISTORY, WORLD_DESCRIPTION } from './fixtures/game'
+import { Description } from './components/Description'
 
 const App: React.FC = () => {
   return (
@@ -16,4 +16,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App;
+export default App
