@@ -2,7 +2,10 @@ import React, { ReactElement } from 'react'
 import { Alignment, CHARACTER_DATA, Family } from '../fixtures/characters'
 import { Palette } from './Palette'
 
-export interface Palette {main: string, secondaries: string[]}
+export interface Palette {
+  main: string
+  secondaries: string[]
+}
 export interface Character {
   name: string
   description: string[]
