@@ -71,7 +71,6 @@ export const Characters: React.FC = () => {
                 <div className="p-2 rounded-s shadow-sm items-center">
                   <h3>History</h3>
                   <div>
-                    {/* style={{ display: 'flex' }}> */}
                     {char.description.map((d, i) => (
                       <p
                         key={i}
