@@ -28,7 +28,7 @@ const CharactersColorDisplay: React.FC<{ characters: Character[] }> = ({
     }, [])
   }
   return (
-    <div>
+    <div className="my-4">
       <h2>Main colors of characters</h2>
       {swatches}
     </div>
