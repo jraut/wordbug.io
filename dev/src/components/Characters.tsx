@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { FC, ReactElement } from 'react'
 import { Alignment, CHARACTER_DATA, Family } from '../fixtures/characters'
 import { h2style } from './Description'
 import { Palette } from './Palette'
@@ -15,7 +15,7 @@ export interface Character {
   family: Family
 }
 
-const CharactersColorDisplay: React.FC<{ characters: Character[] }> = ({
+const CharactersColorDisplay: FC<{ characters: Character[] }> = ({
   characters,
 }) => {
   const swatches: ReactElement[] = []
@@ -36,7 +36,7 @@ const CharactersColorDisplay: React.FC<{ characters: Character[] }> = ({
   )
 }
 
-export const Characters: React.FC = () => {
+export const Characters: FC = () => {
   const characters = CHARACTER_DATA
   return (
     <div>

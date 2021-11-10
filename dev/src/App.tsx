@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 import { Route, Routes } from 'react-router'
 import './App.css'
 import { Navigation, routes } from './routes'
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <div className="App">
       <Navigation routes={routes} />

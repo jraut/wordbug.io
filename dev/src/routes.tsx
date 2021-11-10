@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Characters } from './components/Characters'
 import { FullLoreView } from './components/FullLoreView'
@@ -6,7 +6,7 @@ import { GameView, HistoryView } from './components/HistoryView'
 
 interface Route {
   path: string
-  element: React.FC
+  element: FC
   title: string
 }
 
@@ -17,7 +17,7 @@ export const routes: Route[] = [
   { path: 'characters', element: Characters, title: 'Characters' },
 ]
 
-export const MenuItem: React.FC<Route> = ({ path, title }) => {
+export const MenuItem: FC<Route> = ({ path, title }) => {
   const { pathname } = useLocation()
   const isActivePath = [path, `/${path}`].includes(pathname)
   // const isActivePath = [path, `/${path}`].includes(pathname)
@@ -33,7 +33,7 @@ export interface Navigation {
   routes: Route[]
 }
 
-export const Navigation: React.FC<Navigation> = ({ routes }) => {
+export const Navigation: FC<Navigation> = ({ routes }) => {
   return (
     <nav>
       <ol>

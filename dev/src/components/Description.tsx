@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC, createElement, ReactHTMLElement } from 'react'
 
 type HeaderLevel = 1 | 2 | 3 | 4 | 5
 interface Description {
@@ -10,21 +10,21 @@ interface Description {
 export const h1style = 'text-xl font-large text-black p-2 m:p-5 mx-auto'
 export const h2style = 'text-lg font-large p-2 m:p-3 mx-auto'
 
-const Header: React.FC<{ level: HeaderLevel }> = ({ level, children }) => {
+const Header: FC<{ level: HeaderLevel }> = ({ level, children }) => {
   const headerLevels: Record<
     HeaderLevel,
-    React.ReactHTMLElement<HTMLHeadingElement>
+    ReactHTMLElement<HTMLHeadingElement>
   > = {
-    1: React.createElement('h1', { className: h1style }, children),
-    2: React.createElement('h2', { className: h2style }, children),
-    3: React.createElement('h3', { className: '' }, children),
-    4: React.createElement('h4', { className: '' }, children),
-    5: React.createElement('h5', { className: '' }, children),
+    1: createElement('h1', { className: h1style }, children),
+    2: createElement('h2', { className: h2style }, children),
+    3: createElement('h3', { className: '' }, children),
+    4: createElement('h4', { className: '' }, children),
+    5: createElement('h5', { className: '' }, children),
   }
   return headerLevels[level]
 }
 
-export const Description: React.FC<Description> = ({
+export const Description: FC<Description> = ({
   content,
   header,
   level = 2,
