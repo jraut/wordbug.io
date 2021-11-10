@@ -7,21 +7,16 @@ interface Description {
   level?: HeaderLevel
 }
 
+export const h1style = 'text-xl font-large text-black p-2 m:p-5 mx-auto'
+export const h2style = 'text-lg font-large p-2 m:p-3 mx-auto'
+
 const Header: React.FC<{ level: HeaderLevel }> = ({ level, children }) => {
   const headerLevels: Record<
     HeaderLevel,
     React.ReactHTMLElement<HTMLHeadingElement>
   > = {
-    1: React.createElement(
-      'h1',
-      { className: 'text-xl font-large text-black p-2 m:p-5 mx-auto' },
-      children,
-    ),
-    2: React.createElement(
-      'h2',
-      { className: 'text-lg font-large p-2 m:p-3 mx-auto' },
-      children,
-    ),
+    1: React.createElement('h1', { className: h1style }, children),
+    2: React.createElement('h2', { className: h2style }, children),
     3: React.createElement('h3', { className: '' }, children),
     4: React.createElement('h4', { className: '' }, children),
     5: React.createElement('h5', { className: '' }, children),

@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Alignment, CHARACTER_DATA, Family } from '../fixtures/characters'
+import { h2style } from './Description'
 import { Palette } from './Palette'
 
 export interface Palette {
@@ -39,7 +40,7 @@ export const Characters: React.FC = () => {
   const characters = CHARACTER_DATA
   return (
     <div>
-      <h1 className="text-xl font-large text-black">Characters</h1>
+      <h2 className={h2style}>Characters</h2>
       <div className="grid sm:grid-cols-2 xl:grid-cols-4">
         {characters.map((char) => {
           return (
