@@ -2,6 +2,7 @@ module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
+    'plugin:react/jsx-runtime', // Support JSX transform from v17
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
     'prettier', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
   ],
@@ -14,6 +15,7 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 'off',
+    
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/explicit-function-return-type': [

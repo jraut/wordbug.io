@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC } from "react"
 
 interface Palette {
   main: string
   secondaries: string[]
 }
 
-export const Palette: React.FC<Palette> = ({ main, secondaries }) => {
+export const Palette: FC<Palette> = ({ main, secondaries }) => {
   return (
     <div className="flex-col">
       <div style={{ background: main }} className="p-1 mb-1">
