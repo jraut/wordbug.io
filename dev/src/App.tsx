@@ -1,11 +1,21 @@
 import React from 'react'
+import { Route, Routes } from 'react-router'
 import './App.css'
-import { FullLoreView } from './components/FullLoreView'
+import { Navigation, routes } from './routes'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <FullLoreView />
+      <Navigation routes={routes} />
+      <Routes>
+        {routes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={<route.element />}
+          />
+        ))}
+      </Routes>
     </div>
   )
 }
