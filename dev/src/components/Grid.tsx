@@ -7,7 +7,18 @@ export interface Grid {
   height: number
 }
 const easings = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out']
+const delays = [
+  'delay-75',
+  'delay-100',
+  'delay-150',
+  'delay-200',
+  'delay-300',
+  'delay-500',
+  'delay-700',
+  'delay-1000',
+]
 const nEasings = easings.length
+const nDelays = delays.length
 export const Grid: FC<Grid> = ({ characters, width, height }) => {
   const nx = Math.ceil(Math.sqrt((characters.length * width) / height))
   let ny = Math.ceil(Math.sqrt((characters.length * height) / width))
@@ -22,10 +33,12 @@ export const Grid: FC<Grid> = ({ characters, width, height }) => {
     >
       {characters.map((char, i) => {
         const easing = easings[i % nEasings]
+        const delay = delays[i % nDelays]
+
         return (
           <div
             key={i}
-            className={`flex p-1 absolute transition-all duration-700 ${easing}`}
+            className={`flex p-1 absolute transition-all duration-700 ${easing} ${delay}`}
             style={{
               width: `${blockDimension}px`,
               height: `${blockDimension}px`,
