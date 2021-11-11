@@ -12,17 +12,6 @@ export const HistoryView: FC<HistoryView> = () => {
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface GameView {}
-
-export const GameView: FC<GameView> = () => {
-  return (
-    <div>
-      <Description header="The game of Wordbug" content={GAME_DESCRIPTION} />
-    </div>
-  )
-}
-
 import { Characters } from './Characters'
 import { FC } from 'react'
 
