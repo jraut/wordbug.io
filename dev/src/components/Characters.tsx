@@ -37,7 +37,7 @@ const CharactersColorDisplay: FC<{ characters: Character[] }> = ({
 }
 
 export const Characters: FC = () => {
-  const characters = CHARACTER_DATA
+  const characters = Object.values(CHARACTER_DATA)
   return (
     <div>
       <h2 className={h2style}>Characters</h2>

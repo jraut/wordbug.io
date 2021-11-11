@@ -2,9 +2,18 @@ import { Character } from '../components/Characters'
 
 export type Family = 'wolf' | 'squirrel' | 'lizard' | 'mystery'
 export type Alignment = 'light' | 'dark'
+export type CharacterName =
+  | 'Saash'
+  | 'Rugo'
+  | 'Aerith'
+  | 'Celso'
+  | 'Theodorus'
+  | 'Mira'
+  | 'Mystery-1'
+  | 'Mystery-2' 
 
-export const CHARACTER_DATA: Character[] = [
-  {
+export const CHARACTER_DATA: Record<CharacterName, Character> = {
+  Saash: {
     name: 'Saash',
     alignment: 'dark',
     family: 'wolf',
@@ -18,7 +27,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#142f0f', '#2e4a5b', '#94679C'],
     },
   },
-  {
+  Rugo: {
     name: 'Rugo',
     alignment: 'light',
     family: 'wolf',
@@ -32,7 +41,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#87b251', '#a1d5cf', '#c476aa'],
     },
   },
-  {
+  Aerith: {
     name: 'Aerith',
     alignment: 'dark',
     family: 'squirrel',
@@ -46,7 +55,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#2d6a75', '#8270a3', '#d52f25'],
     },
   },
-  {
+  Celso: {
     name: 'Celso',
     alignment: 'light',
     family: 'squirrel',
@@ -59,7 +68,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#a1d5cf', '#44b3df', '#5B4998'],
     },
   },
-  {
+  Theodorus: {
     name: 'Theodorus',
     alignment: 'dark',
     family: 'lizard',
@@ -73,7 +82,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#48484b', '#c8393b', '#50590d'],
     },
   },
-  {
+  Mira: {
     name: 'Mira',
     alignment: 'light',
     family: 'lizard',
@@ -86,7 +95,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#5b5b5e', '#ea949d', '#f2edbe'],
     },
   },
-  {
+  'Mystery-1': {
     name: 'Mystery 1',
     alignment: 'dark',
     family: 'mystery',
@@ -96,7 +105,7 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#582b3a', '#a76225', '#009e8f'],
     },
   },
-  {
+  'Mystery-2': {
     name: 'Mystery 2',
     alignment: 'light',
     family: 'mystery',
@@ -106,4 +115,4 @@ export const CHARACTER_DATA: Character[] = [
       secondaries: ['#ec7faa', '#c49d69', '#f2dddd'],
     },
   },
-]
+}
