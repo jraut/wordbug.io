@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Characters } from './components/Characters'
+import { CharactersViewPage } from './components/Pages/CharactersViewPage'
 import { FullLoreView } from './components/FullLoreView'
 import { HistoryView } from './components/HistoryView'
 import { GameViewPage } from './components/Pages/GameViewPage'
@@ -15,7 +15,7 @@ export const routes: Route[] = [
   { path: '/', element: FullLoreView, title: 'Home' },
   { path: 'game', element: GameViewPage, title: 'Game' },
   { path: 'history', element: HistoryView, title: 'History' },
-  { path: 'characters', element: Characters, title: 'Characters' },
+  { path: 'characters', element: CharactersViewPage, title: 'Characters' },
 ]
 
 export const MenuItem: FC<Route> = ({ path, title }) => {
