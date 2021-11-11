@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CharactersViewPage } from './components/Pages/CharactersViewPage'
 import { FullLoreView } from './components/FullLoreView'
-import { HistoryView } from './components/HistoryView'
+import { LoreViewPage } from './components/Pages/LoreViewPage'
 import { GameViewPage } from './components/Pages/GameViewPage'
 
 interface Route {
@@ -14,7 +14,7 @@ interface Route {
 export const routes: Route[] = [
   { path: '/', element: FullLoreView, title: 'Home' },
   { path: 'game', element: GameViewPage, title: 'Game' },
-  { path: 'history', element: HistoryView, title: 'History' },
+  { path: 'history', element: LoreViewPage, title: 'History' },
   { path: 'characters', element: CharactersViewPage, title: 'Characters' },
 ]
 
