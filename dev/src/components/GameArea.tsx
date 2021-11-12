@@ -22,17 +22,17 @@ export const Draggable: FC<Draggable> = ({
 
   const handleDrag = (e: React.DragEvent<HTMLDivElement>): void => {
     const { buttons, clientX, clientY } = e
-    if (buttons === 0 && clientX !== 0 && clientY !== 0) {
+    if (
+      buttons === undefined ||
+      (buttons === 0 && clientX !== 0 && clientY !== 0)
+    ) {
       const { offsetTop: y, offsetLeft: x } = e.currentTarget
-      console.log(e)
-      console.log({ position, x })
       const newPosition = clientX - (parentRef?.current?.offsetLeft ?? 0)
       setPosition(newPosition)
       onDrag({
         x: newPosition,
         y,
       })
-      console.log(parentRef.current?.offsetLeft)
     }
   }
 
@@ -52,7 +52,8 @@ export const Draggable: FC<Draggable> = ({
 export interface GameArea {}
 
 export const GameArea: FC<GameArea> = () => {
-  const [width, setWidth] = useState(400)
+  // TODO: initial width katsotaan containerRefistä
+  const [width, setWidth] = useState(300)
   const containerRef = useRef<HTMLDivElement>(null)
   const resizeWidth = ({ x, y: _y }: Coordinates): void => {
     setWidth(x)
