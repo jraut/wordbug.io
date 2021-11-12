@@ -2,6 +2,9 @@ import { FC } from 'react'
 import { Route, Routes } from 'react-router'
 import './App.css'
 import { Navigation, routes } from './routes'
+import { polyfill } from 'mobile-drag-drop'
+
+polyfill()
 
 const App: FC = () => {
   return (
