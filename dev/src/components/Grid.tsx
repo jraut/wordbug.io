@@ -28,7 +28,7 @@ export const Grid: FC<Grid> = ({ characters, width, height }) => {
   const blockDimension = Math.min(width / nx, height / ny)
   return (
     <div
-      className="flex flex-wrap relative inset-o mx-auto"
+      className="flex flex-wrap relative inset-o mx-auto transition-width ease-in-out duration-700"
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       {characters.map((char, i) => {
@@ -38,7 +38,7 @@ export const Grid: FC<Grid> = ({ characters, width, height }) => {
         return (
           <div
             key={i}
-            className={`flex p-1 absolute transition-all duration-700 ${easing} ${delay}`}
+            className={`flex p-1 absolute transition-positioning duration-700 ${easing} ${delay}`}
             style={{
               width: `${blockDimension}px`,
               height: `${blockDimension}px`,

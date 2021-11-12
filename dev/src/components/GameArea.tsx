@@ -26,8 +26,17 @@ export const Draggable: FC<Draggable> = ({
       buttons === undefined ||
       (buttons === 0 && clientX !== 0 && clientY !== 0)
     ) {
-      const { offsetTop: y, offsetLeft: x } = e.currentTarget
-      const newPosition = clientX - (parentRef?.current?.offsetLeft ?? 0)
+      const {
+        offsetTop: y,
+        // offsetLeft: x,
+        // clientWidth: width,
+      } = e.currentTarget
+      const { offsetLeft, clientWidth: width } = parentRef?.current ?? {
+        offsetLeft: 0,
+        clientWidth: 0,
+      }
+      let newPosition = clientX - offsetLeft
+      newPosition = (newPosition - width) * 2 + width
       setPosition(newPosition)
       onDrag({
         x: newPosition,
@@ -60,7 +69,7 @@ export const GameArea: FC<GameArea> = () => {
   }
   return (
     <div className="flex">
-      <div ref={containerRef} className="relative mx-auto">
+      <div ref={containerRef} className="relative mx-auto transition-spacing">
         <Draggable
           parentRef={containerRef}
           onDrag={resizeWidth}
