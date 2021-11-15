@@ -31,7 +31,7 @@ export const Description: FC<Description> = ({
 }) => {
   const textParagraphClass = 'max-w-sm mx-auto p-4'
   return (
-    <div>
+    <div className="prose m-auto">
       {header ? <Header level={level}>{header}</Header> : undefined}
       {typeof content === 'string' ? (
         <p className={textParagraphClass}>{content}</p>

@@ -69,17 +69,11 @@ export const Characters: FC = () => {
                 <div className="p-2 rounded-s shadow-sm items-center">
                   <Palette {...char.colors} />
                 </div>
-                <div className="p-2 rounded-s shadow-sm items-center">
+                <div className="p-2 rounded-s shadow-sm items-center prose">
                   <h3>History</h3>
                   <div>
                     {char.description.map((d, i) => (
-                      <p
-                        key={i}
-                        className="max-w-sm mx-auto p-2 font-serif text-left"
-                      >
-                        {' '}
-                        {d}
-                      </p>
+                      <p key={i}> {d}</p>
                     ))}
                   </div>
                 </div>
