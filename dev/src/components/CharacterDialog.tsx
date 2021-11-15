@@ -56,7 +56,9 @@ export const CharacterLines: Record<
 
 export const DialogLines: Record<CharacterLineType, CharacterLineHandler> = {
   Random: (T) => CharacterLines[T]?.['Random'] ?? 'Random',
-  Ok: (T) => CharacterLines[T]?.['Ok'] ?? 'All right!',
+  Ok: (T) =>
+    CharacterLines[T]?.['Ok'] ??
+    'The game is a simple game where players try to search for words from a grid of letters. The letters are chosen randomly. The player may change the proportions of the grid to adjust the alignment of characters in the grid. The game takes place in the world of Gubdrow.!',
   Hello: (T) => CharacterLines[T]?.['Hello'] ?? 'Hello!',
 }
 

@@ -3,6 +3,10 @@ import { Route, Routes } from 'react-router'
 import './App.css'
 import { Navigation, routes } from './routes'
 import { polyfill } from 'mobile-drag-drop'
+import {
+  CharacterDialog,
+  CharacterLineType,
+} from './components/CharacterDialog'
 
 polyfill()
 
@@ -19,6 +23,7 @@ const App: FC = () => {
           />
         ))}
       </Routes>
+      <CharacterDialog character="Rugo" lineType={CharacterLineType.Ok} />
     </div>
   )
 }
