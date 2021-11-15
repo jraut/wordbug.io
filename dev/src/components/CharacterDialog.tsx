@@ -2,23 +2,23 @@ import { FC, useEffect, useState } from 'react'
 import { CharacterName } from '../fixtures/characters'
 import { UserIcon } from './UserIcon'
 
-export enum CharacterLineType {
+export enum DialogType {
   Random = 'Random',
   Ok = 'Ok',
   Hello = 'Hello',
 }
 
-export type CharacterLineHandler = (t: CharacterName) => string
+export type DialogHandler = (t: CharacterName) => string
 
-const GenericLines: Record<CharacterLineType, string[]> = {
-  [CharacterLineType.Random]: ['Juuh elikkäs'],
-  [CharacterLineType.Ok]: ['Ok!'],
-  [CharacterLineType.Hello]: ['Hi there!'],
+const GenericLines: Record<DialogType, string[]> = {
+  [DialogType.Random]: ['Juuh elikkäs'],
+  [DialogType.Ok]: ['Ok!'],
+  [DialogType.Hello]: ['Hi there!'],
 }
 
 export const CharacterLines: Record<
   CharacterName,
-  Partial<Record<CharacterLineType, string[]>>
+  Partial<Record<DialogType, string[]>>
 > = {
   Rugo: {
     Random: [
@@ -64,30 +64,30 @@ const randomItemFromArray = (items: string[]): string =>
   items[Math.floor(Math.random() * items.length)]
 
 // Build dialog line handlers
-export const dialogLines = Object.keys(CharacterLineType).reduce<
-  Record<CharacterLineType, CharacterLineHandler>
+export const dialogLines = Object.keys(DialogType).reduce<
+  Record<DialogType, DialogHandler>
 >(
   (memo, dialogLineType) => {
     return {
       ...memo,
       [dialogLineType]: (char: CharacterName) => {
         const lines =
-          CharacterLines?.[char]?.[dialogLineType as CharacterLineType] ??
-          GenericLines[dialogLineType as CharacterLineType]
+          CharacterLines?.[char]?.[dialogLineType as DialogType] ??
+          GenericLines[dialogLineType as DialogType]
         return randomItemFromArray(lines)
       },
     }
   },
   {
-    [CharacterLineType.Random]: () => '',
-    [CharacterLineType.Ok]: () => '',
-    [CharacterLineType.Hello]: () => '',
+    [DialogType.Random]: () => '',
+    [DialogType.Ok]: () => '',
+    [DialogType.Hello]: () => '',
   },
 )
 
 export interface CharacterDialog {
   character: CharacterName
-  lineType: CharacterLineType
+  lineType: DialogType
 }
 
 export const CharacterDialog: FC<CharacterDialog> = ({
