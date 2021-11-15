@@ -2,70 +2,89 @@ import { FC, useEffect, useState } from 'react'
 import { CharacterName } from '../fixtures/characters'
 import { UserIcon } from './UserIcon'
 
-// Helper
-const StringIsNumber = (value: string): boolean =>
-  isNaN(Number(value)) === false
-
-// Turn enum into array of numbers
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const enumToArray = (enumme: Record<number | string, any>): string[] => {
-  return Object.keys(enumme)
-    .filter(StringIsNumber)
-    .map((key) => enumme[key])
-}
-
 export enum CharacterLineType {
   Random = 'Random',
   Ok = 'Ok',
   Hello = 'Hello',
 }
 
-export const characterLineTypes = enumToArray(CharacterLineType) // TODO: Use slice
-
 export type CharacterLineHandler = (t: CharacterName) => string
+
+const GenericLines: Record<CharacterLineType, string[]> = {
+  [CharacterLineType.Random]: ['Juuh elikkäs'],
+  [CharacterLineType.Ok]: ['Ok!'],
+  [CharacterLineType.Hello]: ['Hi there!'],
+}
 
 export const CharacterLines: Record<
   CharacterName,
-  Partial<Record<CharacterLineType, string>>
+  Partial<Record<CharacterLineType, string[]>>
 > = {
   Rugo: {
-    Random: 'Hip hei',
+    Random: [
+      "I'll find a way to save us all.",
+      'My friends are here for me.',
+      "I'll fight for a new future.",
+      "I'm trying to save everyone.",
+      "We're not gonna give up.",
+      'This world needs a hero.',
+      "I will fight for the world's future.",
+      "There's a lot of people counting on me.",
+      "I'll be a hero to everyone.",
+      "I'm fighting for the sake of the world.",
+      "I won't let my friends down.",
+      "We'll find a way to save everyone.",
+      'My friends are here for me.',
+    ],
   },
   Saash: {
-    Random: 'Hip hei! My name is Saash!',
+    Random: ['Hip hei! My name is Saash!'],
   },
   Aerith: {
-    Random: 'Hip hei! My name is Aerith!',
+    Random: ['Hip hei! My name is Aerith!'],
   },
   Celso: {
-    Random: 'Hip hei! My name is Celso!',
+    Random: ['Hip hei! My name is Celso!'],
   },
   Theodorus: {
-    Random: 'Hip hei! My name is Theodorus!',
+    Random: ['Hip hei! My name is Theodorus!'],
   },
   Mira: {
-    Random: 'Hip hei! My name is Mira!',
+    Random: ['Hip hei! My name is Mira!'],
   },
   'Mystery-1': {
-    Random: 'Hip hei! My name is Mystery!',
+    Random: ['Hip hei! My name is Mystery!'],
   },
   'Mystery-2': {
-    Random: 'Hip hei! My name is Mystery!',
+    Random: ['Hip hei! My name is Mystery!'],
   },
 }
 
-export const DialogLines: Record<CharacterLineType, CharacterLineHandler> = {
-  Random: (T) => CharacterLines[T]?.['Random'] ?? 'Random',
-  Ok: (T) => CharacterLines[T]?.['Ok'] ?? 'All right!',
-  Hello: (T) => CharacterLines[T]?.['Hello'] ?? 'Hello!',
-}
+const randomItemFromArray = (items: string[]): string =>
+  items[Math.floor(Math.random() * items.length)]
 
-export const dialogLine = (
-  character: CharacterName,
-  linetype: CharacterLineType,
-): string => DialogLines[linetype](character)
+// Build dialog line handlers
+export const dialogLines = Object.keys(CharacterLineType).reduce<
+  Record<CharacterLineType, CharacterLineHandler>
+>(
+  (memo, dialogLineType) => {
+    return {
+      ...memo,
+      [dialogLineType]: (char: CharacterName) => {
+        const lines =
+          CharacterLines?.[char]?.[dialogLineType as CharacterLineType] ??
+          GenericLines[dialogLineType as CharacterLineType]
+        return randomItemFromArray(lines)
+      },
+    }
+  },
+  {
+    [CharacterLineType.Random]: () => '',
+    [CharacterLineType.Ok]: () => '',
+    [CharacterLineType.Hello]: () => '',
+  },
+)
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CharacterDialog {
   character: CharacterName
   lineType: CharacterLineType
@@ -75,9 +94,9 @@ export const CharacterDialog: FC<CharacterDialog> = ({
   character,
   lineType,
 }) => {
-  const line = dialogLine(character, lineType)
+  const line = dialogLines[lineType](character)
   const [charIndex, setcharIndex] = useState(0)
-
+  console.log(line) // TODO: Should not refresh constantly, get from state
   useEffect(() => {
     const value = charIndex + 1
     if (charIndex < line.length) {
