@@ -4,6 +4,7 @@ import { CharactersViewPage } from './components/Pages/CharactersViewPage'
 import { FullLoreView } from './components/FullLoreView'
 import { LoreViewPage } from './components/Pages/LoreViewPage'
 import { GameViewPage } from './components/Pages/GameViewPage'
+import { NationsViewPage } from './components/Pages/NationsViewPage'
 
 interface Route {
   path: string
@@ -16,6 +17,7 @@ export const routes: Route[] = [
   { path: 'game', element: GameViewPage, title: 'Game' },
   { path: 'history', element: LoreViewPage, title: 'History' },
   { path: 'characters', element: CharactersViewPage, title: 'Characters' },
+  { path: 'nations', element: NationsViewPage, title: 'Nations' },
 ]
 
 export const MenuItem: FC<Route> = ({ path, title }) => {
