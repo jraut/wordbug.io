@@ -14,6 +14,7 @@ const App: FC = () => {
     <div className="App">
       <Provider store={store}>
         <Navigation routes={routes} />
+        <CharacterDialog />
         <Routes>
           {routes.map((route) => (
             <Route
@@ -23,7 +24,6 @@ const App: FC = () => {
             />
           ))}
         </Routes>
-        <CharacterDialog />
       </Provider>
     </div>
   )
