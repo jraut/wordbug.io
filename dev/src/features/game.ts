@@ -9,14 +9,16 @@ interface GameState {
 }
 
 export const defaultCharacter: CharacterName = 'Rugo'
-const initialDialog: DialogItem = {
-  line: rugoDialogLines?.Random?.[0] || 'Henlo',
-  type: DialogType.Random,
-}
+const initialDialogItems: DialogItem[] = (rugoDialogLines.Random || []).map(
+  (line) => ({
+    line,
+    type: DialogType.Random,
+  }),
+)
 
 const initialState: GameState = {
   character: defaultCharacter,
-  dialogQueue: [initialDialog],
+  dialogQueue: initialDialogItems,
 }
 export const gameSlice = createSlice({
   name: 'game',
