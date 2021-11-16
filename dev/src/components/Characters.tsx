@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react'
-import { Alignment, CHARACTER_DATA, Family } from '../fixtures/characters'
+import { Alignment, CHARACTER_DATA, Family } from 'src/fixtures/characters'
 import { h2style } from './Description'
 import { Palette } from './Palette'
 

@@ -1,9 +1,9 @@
-import { FC } from 'react'
 import {
   MYSTIC_NATION,
   NATION_OF_NORTH,
   NATION_OF_TRADERS,
-} from '../../fixtures/game'
+} from 'src/fixtures/game'
+import { FC } from 'react'
 import { Description } from '../Description'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

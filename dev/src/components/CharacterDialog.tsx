@@ -1,5 +1,6 @@
+import { CharacterName } from 'src/fixtures/characters'
+import { rugoDialogLines } from 'src/fixtures/dialog'
 import { FC, useEffect, useState } from 'react'
-import { CharacterName } from '../fixtures/characters'
 import { UserIcon } from './UserIcon'
 
 export enum DialogType {

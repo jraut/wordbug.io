@@ -1,6 +1,6 @@
+import { GAME_DESCRIPTION } from 'src/fixtures/game'
 import { FC } from 'react'
 import { Description } from '../Description'
-import { GAME_DESCRIPTION } from '../../fixtures/game'
 import { GameArea } from '../GameArea'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

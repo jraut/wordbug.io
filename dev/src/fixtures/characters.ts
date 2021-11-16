@@ -1,5 +1,4 @@
-import { DraftCharacter } from '../components/Characters'
-import { Character } from '../components/Characters'
+import { Character } from 'src/components/Characters'
 
 export type Family = 'wolf' | 'squirrel' | 'lizard' | 'mystery'
 export type Alignment = 'light' | 'dark'

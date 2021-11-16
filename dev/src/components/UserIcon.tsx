@@ -1,5 +1,5 @@
+import { CharacterName } from 'src/fixtures/characters'
 import { FC } from 'react'
-import { CharacterName } from '../fixtures/characters'
 
 const characterImageURLs: Partial<Record<CharacterName, string>> = {}
 

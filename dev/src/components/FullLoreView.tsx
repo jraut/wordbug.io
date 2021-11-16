@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { GAME_DESCRIPTION, HISTORY, WORLD_DESCRIPTION } from '../fixtures/game'
+import { GAME_DESCRIPTION, HISTORY, WORLD_DESCRIPTION } from 'src/fixtures/game'
 import { Characters } from './Characters'
 import { Description } from './Description'
 
