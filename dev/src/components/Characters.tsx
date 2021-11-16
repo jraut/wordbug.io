@@ -55,14 +55,16 @@ export const Characters: FC = () => {
                     {char.name}
                   </h2>
                   <table className="text-left mx-auto pd-2">
-                    <tr>
-                      <td>Alignment: </td>
-                      <td>{char.alignment}</td>
-                    </tr>
-                    <tr>
-                      <td>Family: </td>
-                      <td>{char.family}</td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>Alignment: </td>
+                        <td>{char.alignment}</td>
+                      </tr>
+                      <tr>
+                        <td>Family: </td>
+                        <td>{char.family}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
 
