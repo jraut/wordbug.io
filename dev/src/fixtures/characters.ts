@@ -9,8 +9,6 @@ export type CharacterName =
   | 'Celso'
   | 'Theodorus'
   | 'Mira'
-  | 'Mystery-1'
-  | 'Mystery-2'
 
 export const CHARACTER_DATA: Record<CharacterName, Character> = {
   Saash: {
@@ -93,26 +91,6 @@ export const CHARACTER_DATA: Record<CharacterName, Character> = {
     colors: {
       main: '#7bc6c0',
       secondaries: ['#5b5b5e', '#ea949d', '#f2edbe'],
-    },
-  },
-  'Mystery-1': {
-    name: 'Mystery 1',
-    alignment: 'dark',
-    family: 'mystery',
-    description: [`TO`, `BE`, `BEFINED/DONE`],
-    colors: {
-      main: '#94679C',
-      secondaries: ['#582b3a', '#a76225', '#009e8f'],
-    },
-  },
-  'Mystery-2': {
-    name: 'Mystery 2',
-    alignment: 'light',
-    family: 'mystery',
-    description: [`TO`, `BE`, `BEFINED/DONE`],
-    colors: {
-      main: '#dbdddf',
-      secondaries: ['#ec7faa', '#c49d69', '#f2dddd'],
     },
   },
 }

@@ -27,12 +27,6 @@ export const CharacterLines: Record<CharacterName, Partial<Dialogues>> = {
   Celso: celsoDialogLines,
   Theodorus: theodorusDialogLines,
   Mira: miraDialogLines,
-  'Mystery-1': {
-    Random: ['Hip hei! My name is Mystery!'],
-  },
-  'Mystery-2': {
-    Random: ['Hip hei! My name is Mystery!'],
-  },
 }
 
 const randomItemFromArray = (items: string[]): string =>
