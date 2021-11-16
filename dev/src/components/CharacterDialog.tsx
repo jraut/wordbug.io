@@ -11,6 +11,11 @@ import {
 } from 'src/fixtures/dialog'
 import { FC, useEffect, useState } from 'react'
 import { UserIcon } from './UserIcon'
+import { useAppSelector } from 'src/hooks/store'
+import { selectCharacter, selectFirstDialogueItem } from 'src/features/game'
+
+export const randomItemFromArray = (items: string[]): string =>
+  items[Math.floor(Math.random() * items.length)]
 
 export type DialogHandler = (t: CharacterName) => string
 
@@ -28,9 +33,6 @@ export const CharacterLines: Record<CharacterName, Partial<Dialogues>> = {
   Theodorus: theodorusDialogLines,
   Mira: miraDialogLines,
 }
-
-const randomItemFromArray = (items: string[]): string =>
-  items[Math.floor(Math.random() * items.length)]
 
 // Build dialog line handlers
 export const dialogLines = Object.keys(DialogType).reduce<
@@ -55,28 +57,24 @@ export const dialogLines = Object.keys(DialogType).reduce<
 )
 
 export interface CharacterDialog {
-  character: CharacterName
-  lineType: DialogType
+  character?: CharacterName
 }
 
-export const CharacterDialog: FC<CharacterDialog> = ({
-  character,
-  lineType,
-}) => {
-  const line = dialogLines[lineType](character)
+export const CharacterDialog: FC<CharacterDialog> = ({}) => {
+  const character = useAppSelector(selectCharacter)
+  const { line } = useAppSelector(selectFirstDialogueItem) ?? {}
   const [charIndex, setcharIndex] = useState(0)
   console.log(line) // TODO: Should not refresh constantly, get from state
   useEffect(() => {
     const value = charIndex + 1
-    if (charIndex < line.length) {
+    if (line && charIndex < line.length) {
       const timer = setTimeout(() => setcharIndex(value), 20) // TODO: make user config
       return () => {
         clearTimeout(timer)
       }
     }
   }, [charIndex])
-
-  const subString = line.slice(0, charIndex)
+  const subString = line?.slice(0, charIndex)
 
   return (
     <div className="h-60">
