@@ -6,6 +6,11 @@ export enum DialogType {
 
 export type Dialogues = Record<DialogType, string[]>
 
+export interface DialogItem {
+  type: DialogType
+  line: string
+}
+
 export const rugoDialogLines: Partial<Dialogues> = {
   Random: [
     "I'll find a way to save us all.",
