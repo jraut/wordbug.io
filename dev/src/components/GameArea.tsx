@@ -51,6 +51,7 @@ export const Draggable: FC<Draggable> = ({
       className="absolute"
       style={{ left: `${position}px`, top: '-1em' }}
       onDrag={handleDrag}
+      onDragEnd={handleDrag}
     >
       dragme
     </div>
