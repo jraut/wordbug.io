@@ -10,7 +10,7 @@ export type CharacterName =
   | 'Theodorus'
   | 'Mira'
   | 'Mystery-1'
-  | 'Mystery-2' 
+  | 'Mystery-2'
 
 export const CHARACTER_DATA: Record<CharacterName, Character> = {
   Saash: {
