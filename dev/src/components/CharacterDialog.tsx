@@ -1,5 +1,14 @@
 import { CharacterName } from 'src/fixtures/characters'
-import { DialogType, Dialogues, rugoDialogLines } from 'src/fixtures/dialog'
+import {
+  aerithDialogLines,
+  celsoDialogLines,
+  DialogType,
+  Dialogues,
+  miraDialogLines,
+  rugoDialogLines,
+  saashDialogLines,
+  theodorusDialogLines,
+} from 'src/fixtures/dialog'
 import { FC, useEffect, useState } from 'react'
 import { UserIcon } from './UserIcon'
 
@@ -13,21 +22,11 @@ const GenericLines: Dialogues = {
 
 export const CharacterLines: Record<CharacterName, Partial<Dialogues>> = {
   Rugo: rugoDialogLines,
-  Saash: {
-    Random: ['Hip hei! My name is Saash!'],
-  },
-  Aerith: {
-    Random: ['Hip hei! My name is Aerith!'],
-  },
-  Celso: {
-    Random: ['Hip hei! My name is Celso!'],
-  },
-  Theodorus: {
-    Random: ['Hip hei! My name is Theodorus!'],
-  },
-  Mira: {
-    Random: ['Hip hei! My name is Mira!'],
-  },
+  Saash: saashDialogLines,
+  Aerith: aerithDialogLines,
+  Celso: celsoDialogLines,
+  Theodorus: theodorusDialogLines,
+  Mira: miraDialogLines,
   'Mystery-1': {
     Random: ['Hip hei! My name is Mystery!'],
   },
