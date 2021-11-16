@@ -22,7 +22,7 @@ const CharactersColorDisplay: FC<{ characters: Character[] }> = ({
   {
     characters.forEach(({ name, colors }) => {
       swatches.push(
-        <div style={{ background: colors.main }}>
+        <div key="name" style={{ background: colors.main }}>
           {name}: {colors.main}
         </div>,
       )
