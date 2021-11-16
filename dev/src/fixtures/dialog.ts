@@ -1,4 +1,12 @@
-export const rugoDialogLines = {
+export enum DialogType {
+  Random = 'Random',
+  Ok = 'Ok',
+  Hello = 'Hello',
+}
+
+export type Dialogues = Record<DialogType, string[]>
+
+export const rugoDialogLines: Partial<Dialogues> = {
   Random: [
     "I'll find a way to save us all.",
     'My friends are here for me.',

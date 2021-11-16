@@ -1,26 +1,17 @@
 import { CharacterName } from 'src/fixtures/characters'
-import { rugoDialogLines } from 'src/fixtures/dialog'
+import { DialogType, Dialogues, rugoDialogLines } from 'src/fixtures/dialog'
 import { FC, useEffect, useState } from 'react'
 import { UserIcon } from './UserIcon'
 
-export enum DialogType {
-  Random = 'Random',
-  Ok = 'Ok',
-  Hello = 'Hello',
-}
-
 export type DialogHandler = (t: CharacterName) => string
 
-const GenericLines: Record<DialogType, string[]> = {
+const GenericLines: Dialogues = {
   [DialogType.Random]: ['Juuh elikkäs'],
   [DialogType.Ok]: ['Ok!'],
   [DialogType.Hello]: ['Hi there!'],
 }
 
-export const CharacterLines: Record<
-  CharacterName,
-  Partial<Record<DialogType, string[]>>
-> = {
+export const CharacterLines: Record<CharacterName, Partial<Dialogues>> = {
   Rugo: rugoDialogLines,
   Saash: {
     Random: ['Hip hei! My name is Saash!'],
