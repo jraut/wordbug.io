@@ -11,8 +11,12 @@ import {
 } from 'src/fixtures/dialog'
 import { FC, useEffect, useState } from 'react'
 import { UserIcon } from './UserIcon'
-import { useAppSelector } from 'src/hooks/store'
-import { selectCharacter, selectFirstDialogueItem } from 'src/features/game'
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
+import {
+  selectCharacter,
+  selectFirstDialogueItem,
+  shiftDialogueItem,
+} from 'src/features/game'
 
 export const randomItemFromArray = (items: string[]): string =>
   items[Math.floor(Math.random() * items.length)]
@@ -60,15 +64,40 @@ export interface CharacterDialog {
   character?: CharacterName
 }
 
+const messageDelayTime = 5000
+const charDelayTime = 20
+
 export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const character = useAppSelector(selectCharacter)
-  const { line } = useAppSelector(selectFirstDialogueItem) ?? {}
+  const dispatch = useAppDispatch()
+  const { line: nextLine } = useAppSelector(selectFirstDialogueItem) ?? {}
+  const [line, setLine] = useState('...')
   const [charIndex, setcharIndex] = useState(0)
-  console.log(line) // TODO: Should not refresh constantly, get from state
+  const [delayNext, setDelayNext] = useState(false)
+  useEffect(() => {
+    if (nextLine) {
+      setDelayNext(true)
+      const timer = setTimeout(() => setDelayNext(false), messageDelayTime)
+      return () => {
+        clearTimeout(timer)
+      }
+    }
+  }, [nextLine, delayNext])
+  useEffect(() => {
+    if (nextLine && delayNext === false) {
+      setLine(nextLine)
+      setcharIndex(0)
+    }
+  }, [delayNext])
+  useEffect(() => {
+    if (nextLine) {
+      dispatch(shiftDialogueItem())
+    }
+  }, [delayNext])
   useEffect(() => {
     const value = charIndex + 1
     if (line && charIndex < line.length) {
-      const timer = setTimeout(() => setcharIndex(value), 20) // TODO: make user config
+      const timer = setTimeout(() => setcharIndex(value), charDelayTime) // TODO: make user config
       return () => {
         clearTimeout(timer)
       }

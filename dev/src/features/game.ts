@@ -34,7 +34,8 @@ export const gameSlice = createSlice({
   },
 })
 
-export const { setGameCharacter } = gameSlice.actions
+export const { setGameCharacter, addDialogueItem, shiftDialogueItem } =
+  gameSlice.actions
 
 export const selectCharacter = (state: RootState): CharacterName =>
   state.game.character || 'Rugo'
