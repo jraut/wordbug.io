@@ -25,7 +25,7 @@ export const randomItemFromArray = (items: string[]): string =>
 export type DialogHandler = (t: CharacterName) => string
 
 const GenericLines: Dialogues = {
-  [DialogType.Random]: ['Juuh elikkäs'],
+  [DialogType.Random]: ['I might go out to watch the stars later.'],
   [DialogType.Ok]: ['Ok!'],
   [DialogType.Hello]: ['Hi there!'],
 }
