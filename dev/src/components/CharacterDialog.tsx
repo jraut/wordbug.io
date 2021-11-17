@@ -164,9 +164,9 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const borderPadding = 2
   const borders = 'border-2 border-gray-800'
   return (
-    <div className="h-64">
+    <div className="h-64 m-10">
       <div
-        className={`flex w-8/12 max-w-4xl m-auto h-full p-${borderPadding} ${borders}`}
+        className={`flex w-8/12 max-w-4xl m-auto h-full p-${borderPadding} ${borders} shadow-2xl`}
       >
         <div className={`w-1/3 overflow-hidden mr-${borderPadding} ${borders}`}>
           <div className="aspect-h-1 aspect-w-1 h-full">
