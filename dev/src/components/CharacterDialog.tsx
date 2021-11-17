@@ -28,6 +28,7 @@ const GenericLines: Dialogues = {
   [DialogType.Random]: ['I might go out to watch the stars later.'],
   [DialogType.Ok]: ['Ok!'],
   [DialogType.Hello]: ['Hi there!'],
+  [DialogType.Waiting]: ['I am waiting...'],
 }
 
 export const CharacterLines: Record<CharacterName, Partial<Dialogues>> = {
@@ -58,6 +59,7 @@ export const dialogLines = Object.keys(DialogType).reduce<
     [DialogType.Random]: () => '',
     [DialogType.Ok]: () => '',
     [DialogType.Hello]: () => '',
+    [DialogType.Waiting]: () => '',
   },
 )
 
@@ -65,9 +67,13 @@ export interface CharacterDialog {
   character?: CharacterName
 }
 
-const messageDelayTime = 1000
+const messageDelayTime = 2000
 const idleMessageDelay = 5000
 const charDelayTime = 20
+const idleFrustationTreshold = 5
+// const idleSeed = 1
+
+// const idleLineRandom = new Prando(idleSeed)
 
 export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const character = useAppSelector(selectCharacter)
@@ -76,7 +82,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const [line, setLine] = useState('...')
   const [charIndex, setcharIndex] = useState(0)
   const [delayNext, setDelayNext] = useState(false)
-
+  const [frustrationLevel, setFrustrationLevel] = useState(0)
   // Timer for delaying the next message when nextLine changes
   useEffect(() => {
     if (nextLine) {
@@ -118,17 +124,26 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined
     if (!nextLine) {
-      const line = dialogLines[DialogType.Random](character)
-      timer = setTimeout(
-        () =>
+      timer = setTimeout(() => {
+        if (frustrationLevel < idleFrustationTreshold) {
+          const line = dialogLines[DialogType.Random](character)
           dispatch(
             addDialogueItem({
               line,
               type: DialogType.Random,
             }),
-          ),
-        idleMessageDelay,
-      ) // TODO: make user config
+          )
+        } else {
+          const line = dialogLines[DialogType.Waiting](character)
+          dispatch(
+            addDialogueItem({
+              line,
+              type: DialogType.Waiting,
+            }),
+          )
+        }
+        setFrustrationLevel((level) => level + 1)
+      }, idleMessageDelay) // TODO: make user config
       return () => {
         if (timer) clearTimeout(timer)
       }

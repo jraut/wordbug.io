@@ -1,4 +1,5 @@
 export enum DialogType {
+  Waiting = 'Waiting',
   Random = 'Random',
   Ok = 'Ok',
   Hello = 'Hello',
