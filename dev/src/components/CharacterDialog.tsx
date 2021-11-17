@@ -82,15 +82,19 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const [line, setLine] = useState('...')
   const [charIndex, setcharIndex] = useState(0)
   const [delayNext, setDelayNext] = useState(false)
+  const [idle, setIdle] = useState(false)
   const [frustrationLevel, setFrustrationLevel] = useState(0)
   // Timer for delaying the next message when nextLine changes
   useEffect(() => {
     if (nextLine) {
       setDelayNext(true)
+      setIdle(false)
       const timer = setTimeout(() => setDelayNext(false), messageDelayTime)
       return () => {
         clearTimeout(timer)
       }
+    } else {
+      setIdle(true)
     }
   }, [nextLine])
 
@@ -123,7 +127,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   // Start idle timer if no next line pending
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined
-    if (!nextLine) {
+    if (idle) {
       timer = setTimeout(() => {
         if (frustrationLevel < idleFrustationTreshold) {
           const line = dialogLines[DialogType.Random](character)
@@ -152,7 +156,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
         clearTimeout(timer)
       }
     }
-  }, [nextLine])
+  }, [idle])
 
   const subString = line?.slice(0, charIndex)
 
