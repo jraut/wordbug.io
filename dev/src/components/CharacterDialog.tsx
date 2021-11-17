@@ -67,8 +67,8 @@ export interface CharacterDialog {
   character?: CharacterName
 }
 
-const messageDelayTime = 2000
-const idleMessageDelay = 5000
+const messageDelayTime = 5000
+const idleMessageDelay = 10000
 const charDelayTime = 20
 const idleFrustationTreshold = 5
 // const idleSeed = 1
