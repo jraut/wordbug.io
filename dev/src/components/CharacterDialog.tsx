@@ -147,6 +147,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
           )
         }
         setFrustrationLevel((level) => level + 1)
+        setDelayNext(false)
       }, idleMessageDelay) // TODO: make user config
       return () => {
         if (timer) clearTimeout(timer)
