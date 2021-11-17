@@ -161,10 +161,14 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
 
   const subString = line?.slice(0, charIndex)
 
+  const borderPadding = 2
+  const borders = 'border-2 border-gray-800'
   return (
     <div className="h-64">
-      <div className="flex w-8/12 max-w-4xl m-auto h-full p-2 border-2 border-gray-800">
-        <div className="w-1/3 overflow-hidden border-2  border-gray-800 mr-2">
+      <div
+        className={`flex w-8/12 max-w-4xl m-auto h-full p-${borderPadding} ${borders}`}
+      >
+        <div className={`w-1/3 overflow-hidden mr-${borderPadding} ${borders}`}>
           <div className="aspect-h-1 aspect-w-1 h-full">
             <div className="flex">
               <div className="m-auto">
@@ -173,7 +177,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
             </div>
           </div>
         </div>
-        <div className="h-full w-full flex border-2 border-gray-800 px-4">
+        <div className={`h-full w-full flex px-4 ${borders}`}>
           <div className="my-auto font-mono line-clamp-6 prose prose-2xl text-left">
             {subString}
           </div>
