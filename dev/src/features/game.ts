@@ -9,11 +9,10 @@ interface GameState {
 }
 
 const introLines = [
-  'Juuh elikkäs...',
-  '...hieno homma...',
-  '...eipä tässä...',
-  '...asia kunnossa.',
-  'Vielä kuitenkin sen verran että tähän loppuu introhöpinät ja mennään idle-looppiin.',
+  'Hi! Welcome!',
+  'I am MC Avatar and I am here to say...',
+  "I'll go to idle-mode when your attention starts to sway...",
+  "And after 5 idle-lines I'll start wandering off.",
 ]
 
 export const defaultCharacter: CharacterName = 'Rugo'
