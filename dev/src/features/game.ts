@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CharacterName } from 'src/fixtures/characters'
-import { DialogItem, DialogType, rugoDialogLines } from 'src/fixtures/dialog'
+import { DialogItem, DialogType } from 'src/fixtures/dialog'
 import { RootState } from 'src/store'
 
 interface GameState {
@@ -8,13 +8,19 @@ interface GameState {
   dialogQueue: DialogItem[]
 }
 
+const introLines = [
+  'Juuh elikkäs...',
+  '...hieno homma...',
+  '...eipä tässä...',
+  '...asia kunnossa.',
+  'Vielä kuitenkin sen verran että tähän loppuu introhöpinät ja mennään idle-looppiin.',
+]
+
 export const defaultCharacter: CharacterName = 'Rugo'
-const initialDialogItems: DialogItem[] = (rugoDialogLines.Random || []).map(
-  (line) => ({
-    line,
-    type: DialogType.Random,
-  }),
-)
+const initialDialogItems: DialogItem[] = introLines.map((line) => ({
+  line,
+  type: DialogType.Random,
+}))
 
 const initialState: GameState = {
   character: defaultCharacter,

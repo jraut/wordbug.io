@@ -13,6 +13,7 @@ import { FC, useEffect, useState } from 'react'
 import { UserIcon } from './UserIcon'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import {
+  addDialogueItem,
   selectCharacter,
   selectFirstDialogueItem,
   shiftDialogueItem,
@@ -64,7 +65,8 @@ export interface CharacterDialog {
   character?: CharacterName
 }
 
-const messageDelayTime = 5000
+const messageDelayTime = 1000
+const idleMessageDelay = 5000
 const charDelayTime = 20
 
 export const CharacterDialog: FC<CharacterDialog> = ({}) => {
@@ -74,6 +76,8 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const [line, setLine] = useState('...')
   const [charIndex, setcharIndex] = useState(0)
   const [delayNext, setDelayNext] = useState(false)
+
+  // Timer for delaying the next message when nextLine changes
   useEffect(() => {
     if (nextLine) {
       setDelayNext(true)
@@ -82,18 +86,24 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
         clearTimeout(timer)
       }
     }
-  }, [nextLine, delayNext])
+  }, [nextLine])
+
+  // Pick next line if one is available when delay ends
   useEffect(() => {
-    if (nextLine && delayNext === false) {
+    if (nextLine && delayNext === false && line !== nextLine) {
       setLine(nextLine)
       setcharIndex(0)
     }
   }, [delayNext])
+
+  // Call for another one
   useEffect(() => {
-    if (nextLine) {
+    if (nextLine && delayNext === false) {
       dispatch(shiftDialogueItem())
     }
   }, [delayNext])
+
+  // Advance character-roll-in index
   useEffect(() => {
     const value = charIndex + 1
     if (line && charIndex < line.length) {
@@ -103,6 +113,32 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
       }
     }
   }, [charIndex])
+
+  // Start idle timer if no next line pending
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined
+    if (!nextLine) {
+      const line = dialogLines[DialogType.Random](character)
+      timer = setTimeout(
+        () =>
+          dispatch(
+            addDialogueItem({
+              line,
+              type: DialogType.Random,
+            }),
+          ),
+        idleMessageDelay,
+      ) // TODO: make user config
+      return () => {
+        if (timer) clearTimeout(timer)
+      }
+    } else {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    }
+  }, [nextLine])
+
   const subString = line?.slice(0, charIndex)
 
   return (
