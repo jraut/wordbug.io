@@ -162,14 +162,14 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const subString = line?.slice(0, charIndex)
 
   return (
-    <div className="h-60">
-      <div className="flex w-8/12 m-auto h-full">
+    <div className="h-64">
+      <div className="flex w-8/12 max-w-4xl m-auto h-full">
         <div className="w-1/3 overflow-hidden flex">
           <div className="m-auto h-full">
             <UserIcon character={character} />
           </div>
         </div>
-        <div className="w-2/3 line-clamp-3 prose prose-2xl text-left p-4">
+        <div className="my-auto font-mono line-clamp-6 w-2/3 prose prose-2xl text-left p-4">
           {subString}
         </div>
       </div>
