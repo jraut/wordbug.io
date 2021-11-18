@@ -1,57 +1,41 @@
-import React, { FC, MutableRefObject, useRef, useState } from 'react'
+import {
+  DndContext,
+  DragEndEvent,
+  useDraggable,
+  useDroppable,
+} from '@dnd-kit/core'
+import { CSS } from '@dnd-kit/utilities'
+import { CSSProperties, FC, useState } from 'react'
 import { Grid } from './Grid'
 
+export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Draggable {
-  parentRef: MutableRefObject<HTMLDivElement | null>
-  onDrag: (t: Coordinates) => void
-  initialPosition: number //
+export interface DraggableCorner {
+  id: string
+  sstyle?: CSSProperties
 }
 
 export interface Coordinates {
   x: number
   y: number
 }
-export const Draggable: FC<Draggable> = ({
-  parentRef,
-  onDrag,
-  initialPosition,
-}) => {
-  // const [dragStart, setDragStart] = useState<Coordinates | undefined>()
-  const [position, setPosition] = useState<number>(initialPosition)
 
-  const handleDrag = (e: React.DragEvent<HTMLDivElement>): void => {
-    const { buttons, clientX, clientY } = e
-    if (
-      buttons === undefined ||
-      (buttons === 0 && clientX !== 0 && clientY !== 0)
-    ) {
-      const {
-        offsetTop: y,
-        // offsetLeft: x,
-        // clientWidth: width,
-      } = e.currentTarget
-      const { offsetLeft, clientWidth: width } = parentRef?.current ?? {
-        offsetLeft: 0,
-        clientWidth: 0,
-      }
-      let newPosition = clientX - offsetLeft
-      newPosition = (newPosition - width) * 2 + width
-      setPosition(newPosition)
-      onDrag({
-        x: newPosition,
-        y,
-      })
-    }
-  }
+export const DraggableCorner: FC<DraggableCorner> = ({ id, sstyle }) => {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id,
+    attributes: {
+      roleDescription: 'grid resize handler',
+    },
+  })
+  const style = { transform: CSS.Translate.toString(transform) }
 
   return (
     <div
-      draggable
+      style={{ ...style, ...sstyle }}
       className="absolute"
-      style={{ left: `${position}px`, top: '-1em' }}
-      onDrag={handleDrag}
-      onDragEnd={handleDrag}
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
     >
       dragme
     </div>
@@ -61,27 +45,50 @@ export const Draggable: FC<Draggable> = ({
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GameArea {}
 
+const resizeFactors: Record<string, [CornerModifier, CornerModifier]> = {
+  t: [0, 1],
+  tr: [1, 1],
+  r: [1, 0],
+  br: [1, -1],
+  b: [0, -1],
+  bl: [-1, -1],
+  l: [-1, 0],
+  tl: [-1, 1],
+}
+
 export const GameArea: FC<GameArea> = () => {
-  // TODO: initial width katsotaan containerRefistä
   const [width, setWidth] = useState(300)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const resizeWidth = ({ x, y: _y }: Coordinates): void => {
-    setWidth(x)
+  const [height, setHeight] = useState(800)
+  const { setNodeRef } = useDroppable({ id: 'game-area' })
+  const resizeHandler = (e: DragEndEvent): void => {
+    const { active, delta } = e
+    const { x, y } = delta
+    const { id } = active
+    const [factorX, factorY] = resizeFactors[id] || [1, 1]
+    setWidth(width + 2 * x * factorX)
+    setHeight(height + 2 * y * factorY)
   }
+
   return (
-    <div className="flex">
-      <div ref={containerRef} className="relative mx-auto transition-spacing">
-        <Draggable
-          parentRef={containerRef}
-          onDrag={resizeWidth}
-          initialPosition={width}
-        />
-        <Grid
-          characters={Array.from(Array(200)).map((_, i) => String(i % 10))}
-          width={width}
-          height={800}
-        />
-      </div>
+    <div
+      className="flex"
+      ref={setNodeRef}
+      onDragEnd={(e) => {
+        console.log(e)
+      }}
+    >
+      {' '}
+      <DndContext onDragEnd={resizeHandler}>
+        <div className="relative mx-auto transition-spacing">
+          <DraggableCorner id="tr" sstyle={{ right: '-3em' }} />
+          <DraggableCorner id="tl" sstyle={{ left: '-3em' }} />
+          <Grid
+            characters={Array.from(Array(200)).map((_, i) => String(i % 10))}
+            width={width}
+            height={800}
+          />
+        </div>
+      </DndContext>
     </div>
   )
 }
