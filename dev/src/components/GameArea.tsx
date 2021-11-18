@@ -1,12 +1,13 @@
 import {
+  closestCenter,
   DndContext,
   DragEndEvent,
   useDraggable,
-  useDroppable,
 } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useState } from 'react'
 import { Grid } from './Grid'
+import { snapCenterToCursor } from './grid/Pointer'
 
 export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -59,26 +60,33 @@ const resizeFactors: Record<string, [CornerModifier, CornerModifier]> = {
 export const GameArea: FC<GameArea> = () => {
   const [width, setWidth] = useState(300)
   const [height, setHeight] = useState(800)
-  const { setNodeRef } = useDroppable({ id: 'game-area' })
+  const [checkedIds, setCheckedIds] = useState<number[]>([])
   const resizeHandler = (e: DragEndEvent): void => {
     const { active, delta } = e
-    const { x, y } = delta
     const { id } = active
-    const [factorX, factorY] = resizeFactors[id] || [1, 1]
-    setWidth(width + 2 * x * factorX)
-    setHeight(height + 2 * y * factorY)
+    if (id !== 'grid-pointer') {
+      const { x, y } = delta
+      const [factorX, factorY] = resizeFactors[id] || [1, 1]
+      setWidth(width + 2 * x * factorX)
+      setHeight(height + 2 * y * factorY)
+    }
   }
 
   return (
-    <div
-      className="flex"
-      ref={setNodeRef}
-      onDragEnd={(e) => {
-        console.log(e)
-      }}
-    >
-      {' '}
-      <DndContext onDragEnd={resizeHandler}>
+    <div className="flex">
+      <DndContext
+        onDragEnd={resizeHandler}
+        onDragMove={(e) => {
+          const { id: _id } = e?.over ?? {}
+          const id = Number(_id)
+          if (id && !checkedIds.find((i) => i === id)) {
+            setCheckedIds((checked) => [...checked, Number(id)])
+          }
+        }}
+        modifiers={[snapCenterToCursor]}
+        collisionDetection={closestCenter}
+        autoScroll={false}
+      >
         <div className="relative mx-auto transition-spacing">
           <DraggableCorner id="tr" sstyle={{ right: '-3em' }} />
           <DraggableCorner id="tl" sstyle={{ left: '-3em' }} />
@@ -86,6 +94,7 @@ export const GameArea: FC<GameArea> = () => {
             characters={Array.from(Array(200)).map((_, i) => String(i % 10))}
             width={width}
             height={800}
+            checkedIds={checkedIds}
           />
         </div>
       </DndContext>
