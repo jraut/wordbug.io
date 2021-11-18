@@ -25,7 +25,10 @@ export const MenuItem: FC<Route> = ({ path, title }) => {
   const isActivePath = [path, `/${path}`].includes(pathname)
   // const isActivePath = [path, `/${path}`].includes(pathname)
   return (
-    <Link to={path} className={`m-5 p-2 ${isActivePath ? 'bg-gray-200' : ''}`}>
+    <Link
+      to={path}
+      className={`m-1 md:m-5 p-2 ${isActivePath ? 'bg-gray-200' : ''}`}
+    >
       {title}
     </Link>
   )

@@ -9,7 +9,7 @@ import {
   saashDialogLines,
   theodorusDialogLines,
 } from 'src/fixtures/dialog'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { UserIcon } from './UserIcon'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import {
@@ -78,6 +78,7 @@ const idleFrustationTreshold = 5
 export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const character = useAppSelector(selectCharacter)
   const dispatch = useAppDispatch()
+  const textScrollerRef = useRef<HTMLDivElement>(null)
   const { line: nextLine } = useAppSelector(selectFirstDialogueItem) ?? {}
   const [line, setLine] = useState('...')
   const [charIndex, setcharIndex] = useState(0)
@@ -117,7 +118,13 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   useEffect(() => {
     const value = charIndex + 1
     if (line && charIndex < line.length) {
-      const timer = setTimeout(() => setcharIndex(value), charDelayTime) // TODO: make user config
+      const timer = setTimeout(() => {
+        setcharIndex(value)
+        if (textScrollerRef.current) {
+          textScrollerRef.current.scrollTop =
+            textScrollerRef.current.scrollHeight
+        }
+      }, charDelayTime) // TODO: make user config
       return () => {
         clearTimeout(timer)
       }
@@ -164,11 +171,13 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const borderPadding = 2
   const borders = 'border-2 border-gray-800'
   return (
-    <div className="h-64 m-10">
+    <div className="h-40 md:h-64 max-h-48 md:max-h-64 m-1 md:m-10">
       <div
-        className={`flex w-8/12 max-w-4xl m-auto h-full p-${borderPadding} ${borders} shadow-2xl`}
+        className={`flex items-stretch w-full md:w-8/12 max-w-4xl m-auto h-full p-1 md:p-${borderPadding} ${borders} shadow-2xl`}
       >
-        <div className={`w-1/3 overflow-hidden mr-${borderPadding} ${borders}`}>
+        <div
+          className={`w-1/3 overflow-hidden mr-1 md:mr-${borderPadding} ${borders}`}
+        >
           <div className="aspect-h-1 aspect-w-1 h-full">
             <div className="flex">
               <div className="m-auto">
@@ -177,9 +186,14 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
             </div>
           </div>
         </div>
-        <div className={`h-full w-full flex px-4 ${borders}`}>
-          <div className="my-auto font-mono line-clamp-6 prose prose-2xl text-left">
-            {subString}
+        <div className={`md:h-full w-full flex md:px-4 ${borders}`}>
+          <div
+            ref={textScrollerRef}
+            className="my-auto max-h-36 md:max-h-56 overflow-y-scroll overflow-x-hidden"
+          >
+            <div className="font-mono prose prose-sm md:prose-2xl text-left">
+              {subString}
+            </div>
           </div>
         </div>
       </div>
