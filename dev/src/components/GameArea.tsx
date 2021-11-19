@@ -8,6 +8,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useState } from 'react'
 import { Grid } from 'src/features/grid/Grid'
 import { snapCenterToCursor } from 'src/features/grid/Pointer'
+import { createLevel } from 'src/features/grid/utils'
 
 export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -91,7 +92,7 @@ export const GameArea: FC<GameArea> = () => {
           <DraggableCorner id="tr" style={{ right: '-3em' }} />
           <DraggableCorner id="tl" style={{ left: '-3em' }} />
           <Grid
-            characters={Array.from(Array(200)).map((_, i) => String(i % 10))}
+            characters={createLevel()}
             width={width}
             height={800}
             checkedIds={checkedIds}
