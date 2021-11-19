@@ -1,3 +1,10 @@
+import { FC, useEffect, useRef, useState } from 'react'
+import {
+  addDialogueItem,
+  selectCharacter,
+  selectFirstDialogueItem,
+  shiftDialogueItem,
+} from 'src/features/game/store'
 import { CharacterName } from 'src/fixtures/characters'
 import {
   aerithDialogLines,
@@ -9,15 +16,8 @@ import {
   saashDialogLines,
   theodorusDialogLines,
 } from 'src/fixtures/dialog'
-import { FC, useEffect, useRef, useState } from 'react'
-import { UserIcon } from './UserIcon'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
-import {
-  addDialogueItem,
-  selectCharacter,
-  selectFirstDialogueItem,
-  shiftDialogueItem,
-} from 'src/features/game'
+import { UserIcon } from './UserIcon'
 
 export const randomItemFromArray = (items: string[]): string =>
   items[Math.floor(Math.random() * items.length)]
