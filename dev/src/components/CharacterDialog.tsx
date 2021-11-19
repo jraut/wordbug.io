@@ -121,6 +121,8 @@ export const dialogLines = Object.keys(DialogType).reduce<
     [DialogType.Ok]: () => '',
     [DialogType.Hello]: () => '',
     [DialogType.Waiting]: () => '',
+    [DialogType.Word]: () => '',
+    [DialogType.WordFrustrated]: () => '',
   },
 )
 
