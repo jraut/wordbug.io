@@ -28,11 +28,11 @@ export const DraggableCorner: FC<DraggableCorner> = ({ id, sstyle }) => {
       roleDescription: 'grid resize handler',
     },
   })
-  const style = { transform: CSS.Translate.toString(transform) }
+  const transformStyle = { transform: CSS.Translate.toString(transform) }
 
   return (
     <div
-      style={{ ...style, ...sstyle }}
+      style={{ ...transformStyle, ...sstyle }}
       className="absolute"
       ref={setNodeRef}
       {...listeners}
