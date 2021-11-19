@@ -77,7 +77,7 @@ const GenericLines: Dialogues = {
     "A word! A word! You found a word! Yay! You have got a point! The first point in a long time! Hooray! Let's go!",
     'Do you really think I care about points? Please... Go on... Keep trying... Until you get the next word... But you are too slow... Way too slow...',
     'Good job for scoring a word! Too bad it is ages since the last one. Great we got some points.',
-    'I did not expect another word so soon! Thanks for the points!',
+    'I actually did not expect another word, at all really! Thanks for the points!',
     'I do not appreciate waiting but at least you found another word and gained a point!',
     'I waited for such a long time... But at least you got points for finding a word!',
     'Oh, really? You have scored a word? After such a long time? Congratulations! Too bad it probably will be ages for the next one!',
