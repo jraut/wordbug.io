@@ -3,6 +3,8 @@ export enum DialogType {
   Random = 'Random',
   Ok = 'Ok',
   Hello = 'Hello',
+  Word = 'Word',
+  WordFrustrated = 'WordFrustrated',
 }
 
 export type Dialogues = Record<DialogType, string[]>
