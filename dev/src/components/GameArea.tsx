@@ -13,7 +13,7 @@ export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DraggableCorner {
   id: string
-  sstyle?: CSSProperties
+  style?: CSSProperties
 }
 
 export interface Coordinates {
@@ -21,7 +21,7 @@ export interface Coordinates {
   y: number
 }
 
-export const DraggableCorner: FC<DraggableCorner> = ({ id, sstyle }) => {
+export const DraggableCorner: FC<DraggableCorner> = ({ id, style }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
     attributes: {
@@ -32,7 +32,7 @@ export const DraggableCorner: FC<DraggableCorner> = ({ id, sstyle }) => {
 
   return (
     <div
-      style={{ ...transformStyle, ...sstyle }}
+      style={{ ...transformStyle, ...style }}
       className="absolute"
       ref={setNodeRef}
       {...listeners}
@@ -88,8 +88,8 @@ export const GameArea: FC<GameArea> = () => {
         autoScroll={false}
       >
         <div className="relative mx-auto transition-spacing">
-          <DraggableCorner id="tr" sstyle={{ right: '-3em' }} />
-          <DraggableCorner id="tl" sstyle={{ left: '-3em' }} />
+          <DraggableCorner id="tr" style={{ right: '-3em' }} />
+          <DraggableCorner id="tl" style={{ left: '-3em' }} />
           <Grid
             characters={Array.from(Array(200)).map((_, i) => String(i % 10))}
             width={width}
