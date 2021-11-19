@@ -1,6 +1,6 @@
 import { useDroppable } from '@dnd-kit/core'
 import { FC } from 'react'
-import { Pointer } from './grid/Pointer'
+import { Pointer } from './Pointer'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Grid {

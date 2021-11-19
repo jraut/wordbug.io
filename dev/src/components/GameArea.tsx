@@ -6,8 +6,8 @@ import {
 } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useState } from 'react'
-import { Grid } from './Grid'
-import { snapCenterToCursor } from './grid/Pointer'
+import { Grid } from 'src/features/grid/Grid'
+import { snapCenterToCursor } from 'src/features/grid/Pointer'
 
 export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
