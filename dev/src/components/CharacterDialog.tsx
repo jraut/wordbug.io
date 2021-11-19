@@ -28,7 +28,7 @@ const GenericLines: Dialogues = {
   [DialogType.Random]: ['I might go out to watch the stars later.'],
   [DialogType.Ok]: ['Ok!'],
   [DialogType.Hello]: ['Hi there!'],
-  [DialogType.Waiting]: ['I am waiting...'],
+  [DialogType.Frustrated]: ['I am waiting...'],
   [DialogType.Word]: [
     'I am sure that everyone in the room is happy with your results. Keep going and we will win!',
     "Almost there! Don't give up!",
@@ -120,7 +120,7 @@ export const dialogLines = Object.keys(DialogType).reduce<
     [DialogType.Random]: () => '',
     [DialogType.Ok]: () => '',
     [DialogType.Hello]: () => '',
-    [DialogType.Waiting]: () => '',
+    [DialogType.Frustrated]: () => '',
     [DialogType.Word]: () => '',
     [DialogType.WordFrustrated]: () => '',
   },
@@ -208,11 +208,11 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
             }),
           )
         } else {
-          const line = dialogLines[DialogType.Waiting](character)
+          const line = dialogLines[DialogType.Frustrated](character)
           dispatch(
             addDialogueItem({
               line,
-              type: DialogType.Waiting,
+              type: DialogType.Frustrated,
             }),
           )
         }

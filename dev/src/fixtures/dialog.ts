@@ -1,5 +1,5 @@
 export enum DialogType {
-  Waiting = 'Waiting',
+  Frustrated = 'Frustrated',
   Random = 'Random',
   Ok = 'Ok',
   Hello = 'Hello',
@@ -30,7 +30,7 @@ export const rugoDialogLines: Partial<Dialogues> = {
     "We'll find a way to save everyone.",
     'My friends are here for me.',
   ],
-  Waiting: [
+  Frustrated: [
     "I'm not an impatient person. I can wait. But my heart tells me that something is wrong. I will wait no longer. We must hurry.",
     "I'm leaving! If you want to fight, follow me! If you want to get rid of the bugs, stay here and play!",
     "Grrrrr! I wanna go home, to the North! I wanna see my parents again! I don't wanna stay here and wait any longer! I wanna go home!",
@@ -53,7 +53,7 @@ export const saashDialogLines: Partial<Dialogues> = {
     'Ah, what a great night to be with friends...',
     'A party can be a good place to meet new people...',
   ],
-  Waiting: [
+  Frustrated: [
     "Aagh! Too much waiting! What's taking the wretched crew so long? Why don't we make any progress? Let's get on with it!",
     "Hear ye? The wind is cold, me clothes are wet and my throat is dry! Let's get onward and finish this!",
     'Aaargh! This waiting around is driving me crazy! When will we proceed with the game?',
@@ -83,7 +83,7 @@ export const aerithDialogLines: Partial<Dialogues> = {
     "I don't have much time left, but I'd like to share my knowledge with you.",
     'Ah, I think I know what you are looking for.',
   ],
-  Waiting: [
+  Frustrated: [
     "Stop wasting time! I've got to get to the City of the Dead before it's too late!",
     "You can't keep me here! I've got to get to the City of the Dead!",
     'How can I meditate? I am surrounded by fools! Oh the wise are lost!',
@@ -108,7 +108,7 @@ export const celsoDialogLines: Partial<Dialogues> = {
     'You are strong.',
     'Everything will be alright.',
   ],
-  Waiting: [
+  Frustrated: [
     'I am too wise to worry about this. I will spend my time in meditation.',
     "I've spent the past five years in silence! We must get going!",
     "I am fed up with this place! I can't meditate in peace!",
@@ -128,7 +128,7 @@ export const theodorusDialogLines: Partial<Dialogues> = {
     'My feelings are telling me that this is not going to end well.',
     'There is something wrong with this picture.',
   ],
-  Waiting: [
+  Frustrated: [
     'Waaaagh! We are strong, but we are getting tired of waiting! We must take action!',
     "So it's true that all that glitters is not gold? What a bore! I thought this was a glittering situation. I am so sick of waiting! I'll leave this place and head out to see the world!",
     "What?! You think I'm afraid of bugs? I'll tell you what I'm afraid of. I'm afraid of you! And you and you and you!",
@@ -150,7 +150,7 @@ export const miraDialogLines: Partial<Dialogues> = {
     'The land is my home.',
     'This is my land.',
   ],
-  Waiting: [
+  Frustrated: [
     'Agh! This place is a stinky, smelly mess! They should be cleaning up! I am going to report this to the captain!',
     "Hrrrr...I'm not used to this kind of climate. I'm cold. I want to go home!",
     'I must not waste time, yet I can not bear to do anything with this situation. Could we get going?',
