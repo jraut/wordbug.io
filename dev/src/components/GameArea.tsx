@@ -62,13 +62,13 @@ export interface GameArea {}
 
 const resizeFactors: Record<string, [CornerModifier, CornerModifier]> = {
   t: [0, 1],
-  tr: [1, 1],
+  tr: [1, -1],
   r: [1, 0],
-  br: [1, -1],
+  br: [1, 1],
   b: [0, -1],
-  bl: [-1, -1],
+  bl: [-1, 1],
   l: [-1, 0],
-  tl: [-1, 1],
+  tl: [-1, -1],
 }
 
 export const GameArea: FC<GameArea> = () => {
