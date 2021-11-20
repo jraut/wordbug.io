@@ -28,10 +28,20 @@ export interface Coordinates {
 export const indexToCoordinate = (
   index: number,
   dimensions: [number, number],
-  itemsLength: number,
+  frustrated = false,
 ): [number, number] => {
-  const [nx, ny] = dimensions
-  return [index % nx, Math.floor(index / Math.ceil(itemsLength / ny))]
+  const [nx] = dimensions
+  return [index % nx, !frustrated ? Math.floor(index / nx) : index / nx] // make line go wonky if frustrated
+}
+
+export const coordinateToIndex = (
+  coordinate: [number, number],
+  dimensions: [number, number],
+): number => {
+  const [x, y] = coordinate
+  const [nx] = dimensions
+  const fromY = y * nx
+  return fromY + x
 }
 
 // TODO: add functionality
