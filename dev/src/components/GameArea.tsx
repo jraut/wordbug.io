@@ -162,12 +162,18 @@ export const GameArea: FC<GameArea> = () => {
     ) {
       dispatch(addCheckedId(Number(id)))
       // setCheckedIds((checked) => [...stateCheckedIds, Number(id)])
+    } else {
+      console.log({
+        is: isAdjacentSquare(id, lastId, dimensions),
+        id,
+        checkedIds,
+      })
     }
   }
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center overscroll-none">
         <button
           onClick={() => {
             dispatch(clearCheckedIds())
@@ -179,7 +185,7 @@ export const GameArea: FC<GameArea> = () => {
         [ {wordMatch ? `${wordMatch} is a word` : '...'} ] - word:
         <p className={`${wordMatch ? 'bg-red' : ''}`}>{word} -</p>
       </div>
-      <div className="flex w-screen" style={{ height: '60vh' }}>
+      <div className="flex w-screen overscroll-none" style={{ height: '60vh' }}>
         <DndContext
           onDragEnd={resizeHandler}
           onDragMove={checkHandler}

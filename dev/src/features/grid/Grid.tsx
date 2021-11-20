@@ -83,7 +83,7 @@ export const Grid: FC<Grid> = ({
   return (
     <>
       <div
-        className="flex flex-wrap relative inset-o mx-auto transition-width ease-in-out duration-700"
+        className="flex flex-wrap relative inset-o mx-auto transition-width ease-in-out duration-700  overscroll-none"
         style={{ width: `${width}px`, height: `${height}px` }}
       >
         <Pointer />
