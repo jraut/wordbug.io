@@ -46,15 +46,31 @@ export const coordinateToIndex = (
 
 // TODO: add functionality
 const isAdjacentSquare = (
-  _new: number,
+  needle: number,
   previous: number | undefined,
-  _dimensions: [number, number],
+  dimensions: [number, number],
 ): boolean => {
   if (!previous) {
     return true
+  } else {
+    const factors = [-1, 0, 1]
+    const coordinates = indexToCoordinate(previous, dimensions)
+    const [newX, newY] = indexToCoordinate(needle, dimensions)
+    const [x, y] = coordinates
+    const neighbourgs = factors.reduce<number[][]>((memo, modifier) => {
+      return [
+        ...memo,
+        ...factors
+          .map((modifier2) => [x + modifier2, y])
+          .map(([newX, newY]) => [newX, newY + modifier]),
+      ]
+    }, [])
+    const found = neighbourgs.find(
+      ([neighX, neighY]) => neighX === newX && neighY === newY,
+    )
+    console.log({ neighbourgs, found })
+    return Boolean(found)
   }
-
-  return true
 }
 
 export const DraggableCorner: FC<DraggableCorner> = ({ id, style }) => {

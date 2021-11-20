@@ -80,7 +80,6 @@ export const Grid: FC<Grid> = ({
   blockSize,
   dimensions,
 }) => {
-  const charlen = characters.length
   return (
     <>
       <div
@@ -89,7 +88,7 @@ export const Grid: FC<Grid> = ({
       >
         <Pointer />
         {characters.map((char, i) => {
-          const [left, top] = indexToCoordinate(i, dimensions, charlen)
+          const [left, top] = indexToCoordinate(i, dimensions)
           const easing = easings[i % nEasings]
           const delay = delays[i % nDelays]
           const checked = checkedIds.includes(i)
