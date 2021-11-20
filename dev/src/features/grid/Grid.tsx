@@ -1,5 +1,6 @@
 import { useDroppable } from '@dnd-kit/core'
 import { FC } from 'react'
+import { indexToCoordinate } from 'src/components/GameArea'
 import { Pointer } from './Pointer'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -8,6 +9,8 @@ export interface Grid {
   width: number
   height: number
   checkedIds: number[]
+  blockSize: number //  length of a blocks side in pixels
+  dimensions: [x: number, y: number] // dimensions of the grid
 }
 const easings = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out']
 const delays = [
@@ -69,15 +72,15 @@ export const Square: FC<Droppable> = ({
 
 const nEasings = easings.length
 const nDelays = delays.length
-export const Grid: FC<Grid> = ({ characters, width, height, checkedIds }) => {
-  const nx = Math.ceil(Math.sqrt((characters.length * width) / height))
-  let ny = Math.ceil(Math.sqrt((characters.length * height) / width))
-
-  if (nx * (ny - 1) > characters.length) {
-    ny = ny - 1
-  }
-  const blockDimension = Math.min(width / nx, height / ny)
-
+export const Grid: FC<Grid> = ({
+  characters,
+  width,
+  height,
+  checkedIds,
+  blockSize,
+  dimensions,
+}) => {
+  const charlen = characters.length
   return (
     <>
       <div
@@ -86,6 +89,7 @@ export const Grid: FC<Grid> = ({ characters, width, height, checkedIds }) => {
       >
         <Pointer />
         {characters.map((char, i) => {
+          const [left, top] = indexToCoordinate(i, dimensions, charlen)
           const easing = easings[i % nEasings]
           const delay = delays[i % nDelays]
           const checked = checkedIds.includes(i)
@@ -93,12 +97,9 @@ export const Grid: FC<Grid> = ({ characters, width, height, checkedIds }) => {
             <Square
               key={i}
               id={String(i)}
-              dimension={blockDimension}
-              top={
-                blockDimension *
-                Math.floor(i / Math.ceil(characters.length / ny))
-              }
-              left={blockDimension * (i % nx)}
+              dimension={blockSize}
+              top={top * blockSize}
+              left={left * blockSize}
               char={char}
               easing={easing}
               delay={delay}

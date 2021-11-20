@@ -25,13 +25,25 @@ export interface Coordinates {
   y: number
 }
 
+export const indexToCoordinate = (
+  index: number,
+  dimensions: [number, number],
+  itemsLength: number,
+): [number, number] => {
+  const [nx, ny] = dimensions
+  return [index % nx, Math.floor(index / Math.ceil(itemsLength / ny))]
+}
+
 // TODO: add functionality
 const isAdjacentSquare = (
   _new: number,
   previous: number | undefined,
-  _rowLength: number,
+  _dimensions: [number, number],
 ): boolean => {
-  if (!previous) return true
+  if (!previous) {
+    return true
+  }
+
   return true
 }
 
@@ -103,14 +115,24 @@ export const GameArea: FC<GameArea> = () => {
     }
   }, [checkedIds])
 
+  const nx = Math.ceil(Math.sqrt((characters.length * width) / height))
+  let ny = Math.ceil(Math.sqrt((characters.length * height) / width))
+
+  const dimensions: [number, number] = [nx, ny]
+
+  if (nx * (ny - 1) > characters.length) {
+    ny = ny - 1
+  }
+
+  const blockSize = Math.min(width / nx, height / ny)
+
   const checkHandler = (e: DragMoveEvent): void => {
-    console.log('here')
     const { id: _id } = e?.over ?? {}
     const id = Number(_id)
     if (
       id &&
       !checkedIds.find((i) => i === id) &&
-      isAdjacentSquare(id, lastId, 1) // TODO
+      isAdjacentSquare(id, lastId, dimensions) // TODO
     ) {
       dispatch(addCheckedId(Number(id)))
       // setCheckedIds((checked) => [...stateCheckedIds, Number(id)])
@@ -148,6 +170,8 @@ export const GameArea: FC<GameArea> = () => {
               width={width}
               height={height}
               checkedIds={checkedIds}
+              blockSize={blockSize}
+              dimensions={dimensions}
             />
           </div>
         </DndContext>
