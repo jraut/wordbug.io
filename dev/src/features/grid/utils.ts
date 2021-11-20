@@ -12,7 +12,6 @@ export const weightedRandom = (
   return () => {
     let sum = 0
     const rand = rng.next()
-    console.log(rand)
     for (const item of items) {
       const [char, w] = item
       sum += w

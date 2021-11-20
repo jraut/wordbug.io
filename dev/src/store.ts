@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { gameReducer } from 'src/features/game/store'
+import { gridReducer } from './features/grid/store'
 
 export const store = configureStore({
   reducer: {
     game: gameReducer,
+    grid: gridReducer,
   },
 })
 

@@ -40,18 +40,10 @@ export const snapCenterToCursor: Modifier = ({
 export interface Pointer {}
 
 export const Pointer: FC<Pointer> = () => {
-  const {
-    node,
-    over,
-    isDragging,
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-  } = useDraggable({
-    id: 'grid-pointer',
-  })
-  false && console.log(node, over)
+  const { isDragging, attributes, listeners, setNodeRef, transform } =
+    useDraggable({
+      id: 'grid-pointer',
+    })
   const activeStyle = isDragging
     ? {
         // width: '4px',
@@ -61,7 +53,6 @@ export const Pointer: FC<Pointer> = () => {
     : // ? { top:  }
       {}
   const transformStyle = { transform: CSS.Translate.toString(transform) }
-  console.log({ transform })
   return (
     <div
       ref={setNodeRef}
