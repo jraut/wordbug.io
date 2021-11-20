@@ -185,10 +185,10 @@ export const GameArea: FC<GameArea> = () => {
           autoScroll={false}
         >
           <div className="flex relative m-auto transition-spacing">
-            <DraggableCorner id="tr" style={{ right: '-3em' }} />
-            <DraggableCorner id="tl" style={{ left: '-3em' }} />
-            <DraggableCorner id="bl" style={{ left: '-3em', bottom: 0 }} />
-            <DraggableCorner id="br" style={{ right: '-3em', bottom: 0 }} />
+            <DraggableCorner id="tr" style={{ right: '-5em' }} />
+            <DraggableCorner id="tl" style={{ left: '-5em' }} />
+            <DraggableCorner id="bl" style={{ left: '-5em', bottom: 0 }} />
+            <DraggableCorner id="br" style={{ right: '-5em', bottom: 0 }} />
             <Grid
               characters={characters}
               width={width}
