@@ -68,7 +68,6 @@ const isAdjacentSquare = (
     const found = neighbourgs.find(
       ([neighX, neighY]) => neighX === newX && neighY === newY,
     )
-    console.log({ neighbourgs, found })
     return Boolean(found)
   }
 }
@@ -131,7 +130,6 @@ export const GameArea: FC<GameArea> = () => {
   const characters = createLevel()
   const word = checkedIds.map((characterId) => characters[characterId]).join('')
   const re = new RegExp(`^${word.replaceAll('*', '.')}$`, 'ig')
-  console.log(word)
   const wordMatch = words1.find((dictionaryWord) => re.test(dictionaryWord))
 
   useEffect(() => {
