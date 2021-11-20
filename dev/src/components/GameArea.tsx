@@ -126,6 +126,7 @@ export const GameArea: FC<GameArea> = () => {
       const [factorX, factorY] = resizeFactors[id] || [1, 1]
       setWidth(width + 2 * x * factorX)
       setHeight(height + 2 * y * factorY)
+      dispatch(clearCheckedIds())
     }
   }
   const characters = createLevel()
