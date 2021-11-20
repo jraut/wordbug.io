@@ -13,6 +13,7 @@ import { addCheckedId, clearCheckedIds } from 'src/features/grid/store'
 import { createLevel } from 'src/features/grid/utils'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { words1 } from 'src/fixtures/words'
+import { DrawLine } from './DrawLine'
 export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DraggableCorner {
@@ -84,7 +85,7 @@ export const DraggableCorner: FC<DraggableCorner> = ({ id, style }) => {
   return (
     <div
       style={{ ...transformStyle, ...style }}
-      className="absolute"
+      className="absolute z-30"
       ref={setNodeRef}
       {...listeners}
       {...attributes}
@@ -169,6 +170,7 @@ export const GameArea: FC<GameArea> = () => {
         <button
           onClick={() => {
             dispatch(clearCheckedIds())
+            setLastId(undefined)
           }}
         >
           [ clear ]
@@ -189,6 +191,13 @@ export const GameArea: FC<GameArea> = () => {
             <DraggableCorner id="tl" style={{ left: '-5em' }} />
             <DraggableCorner id="bl" style={{ left: '-5em', bottom: 0 }} />
             <DraggableCorner id="br" style={{ right: '-5em', bottom: 0 }} />
+            <DrawLine
+              checkedIds={checkedIds}
+              width={width}
+              height={height}
+              dimensions={dimensions}
+              blockSize={blockSize}
+            />
             <Grid
               characters={characters}
               width={width}

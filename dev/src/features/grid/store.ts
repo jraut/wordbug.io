@@ -6,7 +6,7 @@ interface GridState {
 }
 
 type SquareId = number
-type Word = SquareId[] // a list of the IDs for the characters in a word
+export type Word = SquareId[] // a list of the IDs for the characters in a word
 type SuccesfulWords = Word[] // Same word is ok, same coordinates not
 
 const initialState: GridState = {
