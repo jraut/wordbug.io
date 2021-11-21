@@ -164,6 +164,7 @@ export const GameArea: FC<GameArea> = () => {
     }
     const id = Number(_id)
     if (
+      (id || id === 0) &&
       checkedIds.find((i) => i === id) === undefined &&
       isAdjacentSquare(id, lastId, dimensions) // TODO
     ) {
