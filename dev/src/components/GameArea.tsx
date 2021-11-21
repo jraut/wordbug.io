@@ -13,6 +13,7 @@ import {
   addCheckedId,
   clearCheckedIds,
   Dimensions,
+  setDimensions,
 } from 'src/features/grid/store'
 import { words1 } from 'src/fixtures/words'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
@@ -122,8 +123,8 @@ export const GameArea: FC<GameArea> = () => {
     if (id !== 'grid-pointer') {
       const { x, y } = delta
       const [factorX, factorY] = resizeFactors[id] || [1, 1]
-      setWidth(width + 2 * x * factorX)
-      setHeight(height + 2 * y * factorY)
+      setWidth(Math.max(width + 2 * x * factorX, 200))
+      setHeight(Math.max(height + 2 * y * factorY, 200))
       dispatch(clearCheckedIds())
     }
   }
@@ -150,6 +151,10 @@ export const GameArea: FC<GameArea> = () => {
   }
 
   const blockSize = Math.min(width / nx, height / ny)
+
+  useEffect(() => {
+    setDimensions([nx, ny])
+  }, [nx, ny])
 
   const checkHandler = (e: DragMoveEvent): void => {
     const { id: _id } = e?.over ?? {}

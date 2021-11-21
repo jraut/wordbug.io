@@ -87,5 +87,5 @@ export const gridSlice = createSlice({
 
 export const gridReducer = gridSlice.reducer
 
-export const { setCheckedIds, addCheckedId, clearCheckedIds } =
+export const { setCheckedIds, addCheckedId, clearCheckedIds, setDimensions } =
   gridSlice.actions
