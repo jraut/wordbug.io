@@ -11,6 +11,9 @@ export interface DrawLine {
   blockSize: number
 }
 
+const lastBlockDeviation = 10
+const lastBlockDeviationInit = (lastBlockDeviation / 2) * -1
+
 export const DrawLine: FC<DrawLine> = ({
   checkedIds,
   width,
@@ -38,7 +41,13 @@ export const DrawLine: FC<DrawLine> = ({
           const yCur = y * blockSize + halfBlock
           // last segment
           if (i === checkedIds.length - 1) {
-            return `Q ${xPrev} ${yPrev}, ${xCur} ${yCur}`
+            return `Q ${xPrev} ${yPrev}, ${
+              xCur +
+              (lastBlockDeviationInit + lastBlockDeviation * Math.random())
+            } ${
+              yCur +
+              (lastBlockDeviationInit + lastBlockDeviation * Math.random())
+            }`
           }
           return `Q ${xPrev} ${yPrev}, ${(xPrev + xCur) / 2} ${
             (yPrev + yCur) / 2
