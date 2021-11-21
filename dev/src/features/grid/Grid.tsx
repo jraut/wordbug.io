@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { indexToCoordinate } from 'src/components/GameArea'
 import { useAppSelector } from 'src/hooks/store'
 import { Pointer } from './Pointer'
+import { Dimensions } from './store'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Grid {
@@ -10,6 +11,7 @@ export interface Grid {
   height: number
   checkedIds: number[]
   blockSize: number //  length of a blocks side in pixels
+  dimensions: Dimensions
 }
 const easings = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out']
 const delays = [

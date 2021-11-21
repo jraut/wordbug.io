@@ -9,9 +9,11 @@ import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useEffect, useState } from 'react'
 import { Grid } from 'src/features/grid/Grid'
 import { snapCenterToCursor } from 'src/features/grid/Pointer'
-import { addCheckedId, clearCheckedIds } from 'src/features/grid/store'
-import { createLevel } from 'src/features/grid/utils'
-import { useAppDispatch, useAppSelector } from 'src/hooks/store'
+import {
+  addCheckedId,
+  clearCheckedIds,
+  Dimensions,
+} from 'src/features/grid/store'
 import { words1 } from 'src/fixtures/words'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { DrawLine } from './DrawLine'
@@ -24,16 +26,16 @@ export interface DraggableCorner {
 
 export const indexToCoordinate = (
   index: number,
-  dimensions: [number, number],
+  dimensions: Dimensions,
   frustrated = false,
-): [number, number] => {
+): Dimensions => {
   const [nx] = dimensions
   return [index % nx, !frustrated ? Math.floor(index / nx) : index / nx] // make line go wonky if frustrated
 }
 
 export const coordinateToIndex = (
-  coordinate: [number, number],
-  dimensions: [number, number],
+  coordinate: Dimensions,
+  dimensions: Dimensions,
 ): number => {
   const [x, y] = coordinate
   const [nx] = dimensions
@@ -45,7 +47,7 @@ export const coordinateToIndex = (
 const isAdjacentSquare = (
   needle: number,
   previous: number | undefined,
-  dimensions: [number, number],
+  dimensions: Dimensions,
 ): boolean => {
   if (!previous) {
     return true
@@ -141,7 +143,7 @@ export const GameArea: FC<GameArea> = () => {
   const nx = Math.ceil(Math.sqrt((characters.length * width) / height))
   let ny = Math.ceil(Math.sqrt((characters.length * height) / width))
 
-  const dimensions: [number, number] = [nx, ny]
+  const dimensions: Dimensions = [nx, ny]
 
   if (nx * (ny - 1) > characters.length) {
     ny = ny - 1
@@ -207,6 +209,7 @@ export const GameArea: FC<GameArea> = () => {
               height={height}
               checkedIds={checkedIds}
               blockSize={blockSize}
+              dimensions={dimensions}
             />
           </div>
         </DndContext>

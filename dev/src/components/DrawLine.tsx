@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Word } from 'src/features/grid/store'
+import { Dimensions, Word } from 'src/features/grid/store'
 import { indexToCoordinate } from './GameArea'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -7,7 +7,7 @@ export interface DrawLine {
   checkedIds: Word
   width: number
   height: number
-  dimensions: [number, number]
+  dimensions: Dimensions
   blockSize: number
 }
 
