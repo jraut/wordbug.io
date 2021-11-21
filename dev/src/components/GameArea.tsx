@@ -153,6 +153,10 @@ export const GameArea: FC<GameArea> = () => {
 
   const checkHandler = (e: DragMoveEvent): void => {
     const { id: _id } = e?.over ?? {}
+    const { id: activeId } = e?.active
+    if (activeId !== 'grid-pointer') {
+      return undefined
+    }
     const id = Number(_id)
     if (
       checkedIds.find((i) => i === id) === undefined &&
