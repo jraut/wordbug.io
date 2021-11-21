@@ -7,6 +7,7 @@ interface GameState {
   character?: CharacterName
   dialogQueue: DialogItem[]
   textSpeed: number
+  level: number | undefined
 }
 
 export const textSpeed = {
@@ -32,6 +33,7 @@ const initialState: GameState = {
   character: defaultCharacter,
   dialogQueue: initialDialogItems,
   textSpeed: textSpeed.normal,
+  level: undefined,
 }
 export const gameSlice = createSlice({
   name: 'game',
@@ -46,14 +48,21 @@ export const gameSlice = createSlice({
     setTextSpeed: (state, action: PayloadAction<number>) => {
       state.textSpeed = action.payload
     },
+    setLevel: (state, action: PayloadAction<number>) => {
+      state.level = action.payload
+    },
     shiftDialogueItem: (state) => {
       state.dialogQueue.shift()
     },
   },
 })
 
-export const { setGameCharacter, addDialogueItem, shiftDialogueItem } =
-  gameSlice.actions
+export const {
+  setGameCharacter,
+  addDialogueItem,
+  shiftDialogueItem,
+  setLevel,
+} = gameSlice.actions
 
 export const selectCharacter = (state: RootState): CharacterName =>
   state.game.character || 'Rugo'

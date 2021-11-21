@@ -21,7 +21,10 @@ export const weightedRandom = (
   }
 }
 
-export const createLevel = (seed = 'seed', charAmount = 120): string[] => {
+export const generateCharacters = (
+  seed = 'seed',
+  charAmount = 120,
+): string[] => {
   const generator = weightedRandom(orderedCharFrequencies, seed)
   return Array.from(Array(charAmount)).map(() => generator().toUpperCase())
 }

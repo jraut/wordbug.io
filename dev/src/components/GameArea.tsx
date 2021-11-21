@@ -13,6 +13,7 @@ import { addCheckedId, clearCheckedIds } from 'src/features/grid/store'
 import { createLevel } from 'src/features/grid/utils'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { words1 } from 'src/fixtures/words'
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { DrawLine } from './DrawLine'
 export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -124,7 +125,8 @@ export const GameArea: FC<GameArea> = () => {
       dispatch(clearCheckedIds())
     }
   }
-  const characters = createLevel()
+  const characters = useAppSelector((store) => store.grid.characters)
+
   const word = checkedIds.map((characterId) => characters[characterId]).join('')
   const re = new RegExp(`^${word.replaceAll('*', '.')}$`, 'ig')
   const wordMatch = words1.find((dictionaryWord) => re.test(dictionaryWord))

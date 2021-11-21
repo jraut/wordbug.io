@@ -1,5 +1,6 @@
 import { useDroppable } from '@dnd-kit/core'
 import { FC } from 'react'
+import { indexToCoordinate } from 'src/components/GameArea'
 import { useAppSelector } from 'src/hooks/store'
 import { Pointer } from './Pointer'
 
@@ -70,8 +71,14 @@ export const Square: FC<Droppable> = ({
 
 const nEasings = easings.length
 const nDelays = delays.length
-export const Grid: FC<Grid> = ({ width, height, checkedIds, blockSize }) => {
-  const squares = useAppSelector((state) => state.grid.squares)
+export const Grid: FC<Grid> = ({
+  dimensions,
+  width,
+  height,
+  checkedIds,
+  blockSize,
+}) => {
+  const characters = useAppSelector((store) => store.grid.characters)
   return (
     <>
       <div
@@ -79,7 +86,8 @@ export const Grid: FC<Grid> = ({ width, height, checkedIds, blockSize }) => {
         style={{ width: `${width}px`, height: `${height}px` }}
       >
         <Pointer />
-        {squares.map(([char, left, top], i) => {
+        {characters.map((char, i) => {
+          const [left, top] = indexToCoordinate(i, dimensions)
           const easing = easings[i % nEasings]
           const delay = delays[i % nDelays]
           const checked = checkedIds.includes(i)
