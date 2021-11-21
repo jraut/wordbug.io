@@ -49,7 +49,7 @@ const isAdjacentSquare = (
   previous: number | undefined,
   dimensions: Dimensions,
 ): boolean => {
-  if (!previous) {
+  if (!previous && previous !== 0) {
     return true
   } else {
     const factors = [-1, 0, 1]
@@ -155,11 +155,10 @@ export const GameArea: FC<GameArea> = () => {
     const { id: _id } = e?.over ?? {}
     const id = Number(_id)
     if (
-      id &&
-      !checkedIds.find((i) => i === id) &&
+      checkedIds.find((i) => i === id) === undefined &&
       isAdjacentSquare(id, lastId, dimensions) // TODO
     ) {
-      dispatch(addCheckedId(Number(id)))
+      dispatch(addCheckedId(id))
       // setCheckedIds((checked) => [...stateCheckedIds, Number(id)])
     } else {
       console.log({
