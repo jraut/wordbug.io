@@ -36,6 +36,10 @@ export const DrawLine: FC<DrawLine> = ({
           const yPrev = _yPrev * blockSize + halfBlock
           const xCur = x * blockSize + halfBlock
           const yCur = y * blockSize + halfBlock
+          // last segment
+          if (i === checkedIds.length - 1) {
+            return `Q ${xPrev} ${yPrev}, ${xCur} ${yCur}`
+          }
           return `Q ${xPrev} ${yPrev}, ${(xPrev + xCur) / 2} ${
             (yPrev + yCur) / 2
           }`
