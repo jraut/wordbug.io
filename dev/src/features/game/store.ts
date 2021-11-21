@@ -6,6 +6,13 @@ import { RootState } from 'src/store'
 interface GameState {
   character?: CharacterName
   dialogQueue: DialogItem[]
+  textSpeed: number
+}
+
+export const textSpeed = {
+  slow: 35,
+  normal: 20,
+  quick: 10,
 }
 
 const introLines = [
@@ -24,6 +31,7 @@ const initialDialogItems: DialogItem[] = introLines.map((line) => ({
 const initialState: GameState = {
   character: defaultCharacter,
   dialogQueue: initialDialogItems,
+  textSpeed: textSpeed.normal,
 }
 export const gameSlice = createSlice({
   name: 'game',
@@ -34,6 +42,9 @@ export const gameSlice = createSlice({
     },
     addDialogueItem: (state, action: PayloadAction<DialogItem>) => {
       state.dialogQueue.push(action.payload)
+    },
+    setTextSpeed: (state, action: PayloadAction<number>) => {
+      state.textSpeed = action.payload
     },
     shiftDialogueItem: (state) => {
       state.dialogQueue.shift()
