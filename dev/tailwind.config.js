@@ -7,6 +7,7 @@ module.exports = {
         positioning: 'top, right, bottom, left',
         spacing: 'margin, padding',
         width: 'width',
+        area: 'width, height',
       },
     },
   },
