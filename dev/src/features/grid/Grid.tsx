@@ -1,16 +1,14 @@
 import { useDroppable } from '@dnd-kit/core'
 import { FC } from 'react'
-import { indexToCoordinate } from 'src/components/GameArea'
+import { useAppSelector } from 'src/hooks/store'
 import { Pointer } from './Pointer'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Grid {
-  characters: string[]
   width: number
   height: number
   checkedIds: number[]
   blockSize: number //  length of a blocks side in pixels
-  dimensions: [x: number, y: number] // dimensions of the grid
 }
 const easings = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out']
 const delays = [
@@ -72,14 +70,8 @@ export const Square: FC<Droppable> = ({
 
 const nEasings = easings.length
 const nDelays = delays.length
-export const Grid: FC<Grid> = ({
-  characters,
-  width,
-  height,
-  checkedIds,
-  blockSize,
-  dimensions,
-}) => {
+export const Grid: FC<Grid> = ({ width, height, checkedIds, blockSize }) => {
+  const squares = useAppSelector((state) => state.grid.squares)
   return (
     <>
       <div
@@ -87,8 +79,7 @@ export const Grid: FC<Grid> = ({
         style={{ width: `${width}px`, height: `${height}px` }}
       >
         <Pointer />
-        {characters.map((char, i) => {
-          const [left, top] = indexToCoordinate(i, dimensions)
+        {squares.map(([char, left, top], i) => {
           const easing = easings[i % nEasings]
           const delay = delays[i % nDelays]
           const checked = checkedIds.includes(i)

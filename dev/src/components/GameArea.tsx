@@ -21,11 +21,6 @@ export interface DraggableCorner {
   style?: CSSProperties
 }
 
-export interface Coordinates {
-  x: number
-  y: number
-}
-
 export const indexToCoordinate = (
   index: number,
   dimensions: [number, number],
@@ -206,12 +201,10 @@ export const GameArea: FC<GameArea> = () => {
               blockSize={blockSize}
             />
             <Grid
-              characters={characters}
               width={width}
               height={height}
               checkedIds={checkedIds}
               blockSize={blockSize}
-              dimensions={dimensions}
             />
           </div>
         </DndContext>
