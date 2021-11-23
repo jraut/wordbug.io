@@ -17,6 +17,7 @@ import {
 } from 'src/features/grid/store'
 import { words1 } from 'src/fixtures/words'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
+import { CharacterDialog } from './CharacterDialog'
 import { DrawLine } from './DrawLine'
 export type CornerModifier = 1 | -1 | 0
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -123,8 +124,14 @@ export const GameArea: FC<GameArea> = () => {
     if (id !== 'grid-pointer') {
       const { x, y } = delta
       const [factorX, factorY] = resizeFactors[id] || [1, 1]
-      setWidth(Math.max(width + 2 * x * factorX, 200))
-      setHeight(Math.max(height + 2 * y * factorY, 200))
+      let _width = width + 2 * x * factorX
+      let _height = height + 2 * y * factorY
+      _width = Math.max(_width, 200) // 200 or more
+      _height = Math.max(_height, 200) // 200 or more
+      _width = Math.min(_width, window.innerWidth * 0.95) // less than window
+      _height = Math.min(_height, window.innerHeight * 0.95) // less than winwo
+      setWidth(_width)
+      setHeight(_height)
       dispatch(clearCheckedIds())
     }
   }
@@ -181,47 +188,60 @@ export const GameArea: FC<GameArea> = () => {
 
   return (
     <>
-      <div className="flex justify-center overscroll-none">
-        <button
-          onClick={() => {
-            dispatch(clearCheckedIds())
-            setLastId(undefined)
+      <div className="overflow-hidden overscroll-none absolute top-0 left-0 justify-center w-screen h-screen direction-column">
+        <div className="absolute -right-1">
+          <button
+            onClick={() => {
+              dispatch(clearCheckedIds())
+              setLastId(undefined)
+            }}
+          >
+            [ clear ]
+          </button>
+          [ {wordMatch ? `${wordMatch} is a word` : '...'} ] - word:
+          <p className={`${wordMatch ? 'bg-red' : ''}`}>{word} -</p>
+        </div>
+        <div className="relative top-0 left-0 z-50 m-auto w-10/12 pointer-events-none md:absolute md:w-54 xl:w-2/5">
+          <CharacterDialog />
+        </div>
+        <div
+          className="flex overscroll-none m-auto w-screen duration-200 transition-spacing"
+          style={{
+            marginTop: `${(window.innerHeight - height) / 2}px`,
           }}
         >
-          [ clear ]
-        </button>
-        [ {wordMatch ? `${wordMatch} is a word` : '...'} ] - word:
-        <p className={`${wordMatch ? 'bg-red' : ''}`}>{word} -</p>
-      </div>
-      <div className="flex w-screen overscroll-none" style={{ height: '60vh' }}>
-        <DndContext
-          onDragEnd={resizeHandler}
-          onDragMove={checkHandler}
-          modifiers={[snapCenterToCursor]}
-          collisionDetection={closestCenter}
-          autoScroll={false}
-        >
-          <div className="flex relative m-auto transition-spacing">
-            <DraggableCorner id="tr" style={{ right: '-5em' }} />
-            <DraggableCorner id="tl" style={{ left: '-5em' }} />
-            <DraggableCorner id="bl" style={{ left: '-5em', bottom: 0 }} />
-            <DraggableCorner id="br" style={{ right: '-5em', bottom: 0 }} />
-            <DrawLine
-              checkedIds={checkedIds}
-              width={width}
-              height={height}
-              dimensions={dimensions}
-              blockSize={blockSize}
-            />
-            <Grid
-              width={width}
-              height={height}
-              checkedIds={checkedIds}
-              blockSize={blockSize}
-              dimensions={dimensions}
-            />
+          <DndContext
+            onDragEnd={resizeHandler}
+            onDragMove={checkHandler}
+            modifiers={[snapCenterToCursor]}
+            collisionDetection={closestCenter}
+            autoScroll={false}
+          >
+            <div className="flex relative mx-auto transition-spacing transition-area">
+              <DraggableCorner id="tr" style={{ right: '-5em' }} />
+              <DraggableCorner id="tl" style={{ left: '-5em' }} />
+              <DraggableCorner id="bl" style={{ left: '-5em', bottom: 0 }} />
+              <DraggableCorner id="br" style={{ right: '-5em', bottom: 0 }} />
+              <DrawLine
+                checkedIds={checkedIds}
+                width={width}
+                height={height}
+                dimensions={dimensions}
+                blockSize={blockSize}
+              />
+              <Grid
+                width={width}
+                height={height}
+                checkedIds={checkedIds}
+                blockSize={blockSize}
+                dimensions={dimensions}
+              />
+            </div>
+          </DndContext>
+          <div role="button" className="absolute -bottom-1">
+            Go to menu
           </div>
-        </DndContext>
+        </div>
       </div>
     </>
   )

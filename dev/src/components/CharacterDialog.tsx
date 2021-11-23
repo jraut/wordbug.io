@@ -234,14 +234,14 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
   const borderPadding = 2
   const borders = 'border-2 border-gray-800'
   return (
-    <div className="h-40 md:h-64 max-h-48 md:max-h-64 m-1 md:m-10">
+    <div className="h-40 max-h-48 pointer-events-auto md:h-64 md:max-h-64 md:m-10">
       <div
-        className={`flex items-stretch w-full md:w-8/12 max-w-4xl m-auto h-full p-1 md:p-${borderPadding} ${borders} shadow-2xl`}
+        className={`flex items-stretch p-1 w-full max-w-4xl h-full bg-white shadow-2xl md:p-${borderPadding} ${borders}`}
       >
         <div
-          className={`w-1/3 overflow-hidden mr-1 md:mr-${borderPadding} ${borders}`}
+          className={`overflow-hidden mr-1 w-1/3 md:mr-${borderPadding} ${borders}`}
         >
-          <div className="aspect-h-1 aspect-w-1 h-full">
+          <div className="h-full aspect-h-1 aspect-w-1">
             <div className="flex">
               <div className="m-auto">
                 <UserIcon character={character} />
@@ -249,12 +249,12 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
             </div>
           </div>
         </div>
-        <div className={`md:h-full w-full flex md:px-4 ${borders}`}>
+        <div className={`flex w-full md:h-full md:px-4 ${borders}`}>
           <div
             ref={textScrollerRef}
-            className="my-auto max-h-36 md:max-h-56 overflow-y-scroll overflow-x-hidden"
+            className="overflow-x-hidden overflow-y-scroll my-auto max-h-36 md:max-h-56"
           >
-            <div className="font-mono prose prose-sm md:prose-2xl text-left">
+            <div className="font-mono text-left prose prose-sm md:prose-2xl">
               {subString}
             </div>
           </div>

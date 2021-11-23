@@ -53,7 +53,7 @@ export const Square: FC<Droppable> = ({
   return (
     <div
       ref={setNodeRef}
-      className={'flex p-1 absolute transition-positioning duration-700'}
+      className={'flex absolute p-1 duration-700 transition-positioning'}
       style={{
         width: `${dimension}px`,
         height: `${dimension}px`,
@@ -84,8 +84,12 @@ export const Grid: FC<Grid> = ({
   return (
     <>
       <div
-        className="flex flex-wrap relative inset-o mx-auto transition-area ease-in-out duration-700  overscroll-none"
-        style={{ width: `${width}px`, height: `${height}px` }}
+        className="flex overscroll-none relative flex-wrap mx-auto duration-700 ease-in-out inset-o transition-area"
+        style={{
+          width: `${width}px`,
+          height: `${height}px`,
+          // marginTop: `${(window.innerHeight - height) / 2}px`,
+        }}
       >
         <Pointer />
         {characters.map((char, i) => {

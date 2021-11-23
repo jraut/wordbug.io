@@ -6,15 +6,24 @@ import { LoreViewPage } from './components/Pages/LoreViewPage'
 import { GameViewPage } from './components/Pages/GameViewPage'
 import { NationsViewPage } from './components/Pages/NationsViewPage'
 
+interface GameState {
+  gameOn: boolean
+}
 interface Route {
   path: string
   element: FC
   title: string
+  state?: GameState
 }
 
 export const routes: Route[] = [
   { path: '/', element: FullLoreView, title: 'Home' },
-  { path: 'game', element: GameViewPage, title: 'Game' },
+  {
+    path: 'game',
+    element: GameViewPage,
+    title: 'Game',
+    state: { gameOn: true },
+  },
   { path: 'history', element: LoreViewPage, title: 'History' },
   { path: 'characters', element: CharactersViewPage, title: 'Characters' },
   { path: 'nations', element: NationsViewPage, title: 'Nations' },
@@ -40,7 +49,10 @@ export interface Navigation {
 }
 
 export const Navigation: FC<Navigation> = ({ routes }) => {
-  return (
+  const location = useLocation()
+  const { pathname } = location
+  const gameOn = pathname === '/game' // todo: Maybe could use location.state to see if game is on
+  return !gameOn ? (
     <nav>
       <ol>
         {routes.map((route) => (
@@ -48,5 +60,13 @@ export const Navigation: FC<Navigation> = ({ routes }) => {
         ))}
       </ol>
     </nav>
+  ) : (
+    // TODO: show confirmation before navigating away
+    <Link
+      to="/"
+      className={`absolute z-20 m-1 bg-gray-200 border-8 border-gray-300`}
+    >
+      BACK TO MENU
+    </Link>
   )
 }
