@@ -9,6 +9,7 @@ export interface Palette {
 }
 export interface Character {
   name: string
+  portrait: string
   description: string[]
   colors: Palette
   alignment: Alignment
@@ -51,6 +52,7 @@ export const Characters: FC = () => {
                 }`}
               >
                 <div className="p-2 rounded-s shadow-sm items-center">
+                  <img src={char.portrait} />
                   <h2 className="text-xl font-large font-serif shadow-sm bg-gray-300">
                     {char.name}
                   </h2>

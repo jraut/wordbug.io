@@ -13,6 +13,7 @@ export type CharacterName =
 export const CHARACTER_DATA: Record<CharacterName, Character> = {
   Saash: {
     name: 'Saash',
+    portrait: 'assets/portraits/saash.jpg',
     alignment: 'dark',
     family: 'wolf',
     description: [
@@ -27,6 +28,7 @@ export const CHARACTER_DATA: Record<CharacterName, Character> = {
   },
   Rugo: {
     name: 'Rugo',
+    portrait: 'assets/portraits/rugo.jpg',
     alignment: 'light',
     family: 'wolf',
     description: [
@@ -41,6 +43,7 @@ export const CHARACTER_DATA: Record<CharacterName, Character> = {
   },
   Aerith: {
     name: 'Aerith',
+    portrait: 'assets/portraits/aerith.jpg',
     alignment: 'dark',
     family: 'squirrel',
     description: [
@@ -55,6 +58,7 @@ export const CHARACTER_DATA: Record<CharacterName, Character> = {
   },
   Celso: {
     name: 'Celso',
+    portrait: 'assets/portraits/celso.jpg',
     alignment: 'light',
     family: 'squirrel',
     description: [
@@ -68,6 +72,7 @@ export const CHARACTER_DATA: Record<CharacterName, Character> = {
   },
   Theodorus: {
     name: 'Theodorus',
+    portrait: 'assets/portraits/theodorus.jpg',
     alignment: 'dark',
     family: 'lizard',
     description: [
@@ -82,6 +87,7 @@ export const CHARACTER_DATA: Record<CharacterName, Character> = {
   },
   Mira: {
     name: 'Mira',
+    portrait: 'assets/portraits/mira.jpg',
     alignment: 'light',
     family: 'lizard',
     description: [
