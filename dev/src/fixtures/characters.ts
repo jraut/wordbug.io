@@ -1,14 +1,4 @@
-import { Character } from 'src/components/Characters'
-
-export type Family = 'wolf' | 'squirrel' | 'lizard' | 'mystery'
-export type Alignment = 'light' | 'dark'
-export type CharacterName =
-  | 'Saash'
-  | 'Rugo'
-  | 'Aerith'
-  | 'Celso'
-  | 'Theodorus'
-  | 'Mira'
+import { Character, CharacterName } from 'src/features/select-character/types'
 
 export const CHARACTER_DATA: Record<CharacterName, Character> = {
   Saash: {

@@ -1,20 +1,8 @@
 import { FC, ReactElement } from 'react'
-import { Alignment, CHARACTER_DATA, Family } from 'src/fixtures/characters'
+import { Character } from 'src/features/select-character/types'
+import { CHARACTER_DATA } from 'src/fixtures/characters'
 import { h2style } from './Description'
 import { Palette } from './Palette'
-
-export interface Palette {
-  main: string
-  secondaries: string[]
-}
-export interface Character {
-  name: string
-  portrait: string
-  description: string[]
-  colors: Palette
-  alignment: Alignment
-  family: Family
-}
 
 const CharactersColorDisplay: FC<{ characters: Character[] }> = ({
   characters,

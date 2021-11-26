@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CharacterName } from 'src/fixtures/characters'
 import { DialogItem, DialogType } from 'src/fixtures/dialog'
 import { RootState } from 'src/store'
+import { CharacterName } from '../select-character/types'
 
 interface GameState {
   character?: CharacterName

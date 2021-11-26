@@ -5,7 +5,7 @@ import {
   selectFirstDialogueItem,
   shiftDialogueItem,
 } from 'src/features/game/store'
-import { CharacterName } from 'src/fixtures/characters'
+import { CharacterName } from 'src/features/select-character/types'
 import {
   aerithDialogLines,
   celsoDialogLines,
