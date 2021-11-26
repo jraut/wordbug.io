@@ -15,6 +15,7 @@ import {
   Dimensions,
   setDimensions,
 } from 'src/features/grid/store'
+import { CHARACTER_DATA } from 'src/fixtures/characters'
 import { words1 } from 'src/fixtures/words'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { CharacterDialog } from './CharacterDialog'
@@ -135,6 +136,8 @@ export const GameArea: FC<GameArea> = () => {
       dispatch(clearCheckedIds())
     }
   }
+  const characterName = useAppSelector((state) => state.game.character)
+  const character = characterName ? CHARACTER_DATA[characterName] : undefined
   const characters = useAppSelector((store) => store.grid.characters)
 
   const word = checkedIds
@@ -188,7 +191,6 @@ export const GameArea: FC<GameArea> = () => {
       })
     }
   }
-
   return (
     <>
       <div className="overflow-hidden overscroll-none absolute top-0 left-0 justify-center w-screen h-screen direction-column">
@@ -205,7 +207,7 @@ export const GameArea: FC<GameArea> = () => {
           <p className={`${wordMatch ? 'bg-red' : ''}`}>{word} -</p>
         </div>
         <div className="relative top-0 left-0 z-50 m-auto w-10/12 pointer-events-none md:absolute md:w-54 xl:w-2/5">
-          <CharacterDialog />
+          <CharacterDialog character={character} />
         </div>
         <div
           className="flex overscroll-none m-auto w-screen duration-200 transition-spacing"

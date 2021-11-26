@@ -14,7 +14,7 @@ export interface Palette {
 }
 
 export interface Character {
-  name: string
+  name: CharacterName
   portrait: string
   description: string[]
   colors: Palette

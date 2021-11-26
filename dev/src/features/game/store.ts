@@ -30,7 +30,6 @@ const initialDialogItems: DialogItem[] = introLines.map((line) => ({
 }))
 
 const initialState: GameState = {
-  character: defaultCharacter,
   dialogQueue: initialDialogItems,
   textSpeed: textSpeed.normal,
   level: undefined,

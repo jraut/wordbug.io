@@ -1,11 +1,12 @@
 import { FC, useEffect, useRef, useState } from 'react'
 import {
   addDialogueItem,
-  selectCharacter,
+  defaultCharacter,
   selectFirstDialogueItem,
   shiftDialogueItem,
 } from 'src/features/game/store'
-import { CharacterName } from 'src/features/select-character/types'
+import { Character, CharacterName } from 'src/features/select-character/types'
+import { CHARACTER_DATA } from 'src/fixtures/characters'
 import {
   aerithDialogLines,
   celsoDialogLines,
@@ -17,7 +18,6 @@ import {
   theodorusDialogLines,
 } from 'src/fixtures/dialog'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
-import { UserIcon } from './UserIcon'
 
 export const randomItemFromArray = (items: string[]): string =>
   items[Math.floor(Math.random() * items.length)]
@@ -127,7 +127,7 @@ export const dialogLines = Object.keys(DialogType).reduce<
 )
 
 export interface CharacterDialog {
-  character?: CharacterName
+  character?: Character
 }
 
 const messageDelayTime = 5000
@@ -138,8 +138,9 @@ const idleFrustationTreshold = 5
 
 // const idleLineRandom = new Prando(idleSeed)
 
-export const CharacterDialog: FC<CharacterDialog> = ({}) => {
-  const character = useAppSelector(selectCharacter)
+export const CharacterDialog: FC<CharacterDialog> = ({
+  character = CHARACTER_DATA[defaultCharacter],
+}) => {
   const dispatch = useAppDispatch()
   const textScrollerRef = useRef<HTMLDivElement>(null)
   const { line: nextLine } = useAppSelector(selectFirstDialogueItem) ?? {}
@@ -200,7 +201,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
     if (idle) {
       timer = setTimeout(() => {
         if (frustrationLevel < idleFrustationTreshold) {
-          const line = dialogLines[DialogType.Random](character)
+          const line = dialogLines[DialogType.Random](character.name)
           dispatch(
             addDialogueItem({
               line,
@@ -208,7 +209,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
             }),
           )
         } else {
-          const line = dialogLines[DialogType.Frustrated](character)
+          const line = dialogLines[DialogType.Frustrated](character.name)
           dispatch(
             addDialogueItem({
               line,
@@ -244,7 +245,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({}) => {
           <div className="h-full aspect-h-1 aspect-w-1">
             <div className="flex">
               <div className="m-auto">
-                <UserIcon character={character} />
+                <img src={character.portrait} />
               </div>
             </div>
           </div>
