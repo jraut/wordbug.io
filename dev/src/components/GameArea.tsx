@@ -137,8 +137,11 @@ export const GameArea: FC<GameArea> = () => {
   }
   const characters = useAppSelector((store) => store.grid.characters)
 
-  const word = checkedIds.map((characterId) => characters[characterId]).join('')
-  const re = new RegExp(`^${word.replaceAll('*', '.')}$`, 'ig')
+  const word = checkedIds
+    .map((characterId) => characters[characterId])
+    .join('')
+    .replace(/\*/g, '.')
+  const re = new RegExp(`^${word}$`, 'ig')
   const wordMatch = words1.find((dictionaryWord) => re.test(dictionaryWord))
 
   useEffect(() => {
