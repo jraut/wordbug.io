@@ -16,12 +16,7 @@ export const textSpeed = {
   quick: 10,
 }
 
-const introLines = [
-  'Hi! Welcome!',
-  'I am MC Avatar and I am here to say...',
-  "I'll go to idle-mode when your attention starts to sway...",
-  "And after 5 idle-lines I'll start to get impatient. Idle mode starting, Lets go!",
-]
+const introLines = ['Welcome!']
 
 export const defaultCharacter: CharacterName = 'Rugo'
 const initialDialogItems: DialogItem[] = introLines.map((line) => ({

@@ -233,7 +233,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({
   const subString = line?.slice(0, charIndex)
 
   const borderPadding = 2
-  const borders = 'border-2 border-gray-800'
+  const borders = 'border-2 border-gray-800 rounded-md'
   return (
     <div className="h-40 max-h-48 pointer-events-auto md:h-64 md:max-h-64 md:m-10">
       <div
@@ -244,18 +244,26 @@ export const CharacterDialog: FC<CharacterDialog> = ({
         >
           <div className="h-full aspect-h-1 aspect-w-1">
             <div className="flex">
-              <div className="m-auto">
-                <img src={character.portrait} />
+              <div
+                className="m-auto w-full h-full"
+                style={{ transform: 'scaleX(-1)' }}
+              >
+                <div
+                  className="w-full h-full bg-center bg-cover rounded-sm"
+                  style={{ backgroundImage: `url(${character.portrait})` }}
+                ></div>
               </div>
             </div>
           </div>
         </div>
-        <div className={`flex w-full md:h-full md:px-4 ${borders}`}>
+        <div
+          className={`flex w-full bg-gray-800 rounded-sm md:h-full md:px-4 ${borders}`}
+        >
           <div
             ref={textScrollerRef}
             className="overflow-x-hidden overflow-y-scroll my-auto max-h-36 md:max-h-56"
           >
-            <div className="font-mono text-left prose prose-sm md:prose-2xl">
+            <div className="font-mono text-left text-gray-100 prose prose-sm md:prose-2xl">
               {subString}
             </div>
           </div>
