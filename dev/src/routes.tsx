@@ -1,46 +1,46 @@
 import { FC } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, RouteObject } from 'react-router-dom'
 import { CharactersViewPage } from './components/Pages/CharactersViewPage'
 import { FullLoreView } from './components/FullLoreView'
 import { LoreViewPage } from './components/Pages/LoreViewPage'
 import { GameViewPage } from './components/Pages/GameViewPage'
 import { NationsViewPage } from './components/Pages/NationsViewPage'
 
-interface GameState {
-  gameOn: boolean
-}
-interface Route {
-  path: string
-  element: FC
-  title: string
-  state?: GameState
+interface Route extends RouteObject {
+  title?: string
+  children?: Route[]
 }
 
 export const routes: Route[] = [
-  { path: '/', element: FullLoreView, title: 'Home' },
+  { path: '/', element: <FullLoreView />, title: 'Home' },
   {
     path: 'game',
-    element: GameViewPage,
+    element: <GameViewPage />,
     title: 'Game',
-    state: { gameOn: true },
+    children: [
+      { index: true, element: <GameViewPage />,
+        },
+      { path: "/game/stage/:id", element: <GameViewPage />,
+       }
+    ]
   },
-  { path: 'history', element: LoreViewPage, title: 'History' },
-  { path: 'characters', element: CharactersViewPage, title: 'Characters' },
-  { path: 'nations', element: NationsViewPage, title: 'Nations' },
+  { path: 'history', element: <LoreViewPage />, title: 'History' },
+  { path: 'characters', element: <CharactersViewPage />, title: 'Characters' },
+  { path: 'nations', element: <NationsViewPage />, title: 'Nations' },
 ]
 
 export const MenuItem: FC<Route> = ({ path, title }) => {
   const { pathname } = useLocation()
   const isActivePath = [path, `/${path}`].includes(pathname)
   // const isActivePath = [path, `/${path}`].includes(pathname)
-  return (
+  return  path && title ? (
     <Link
       to={path}
       className={`m-1 md:m-5 p-2 ${isActivePath ? 'bg-gray-200' : ''}`}
     >
       {title}
     </Link>
-  )
+  ) : null
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
