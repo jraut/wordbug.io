@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Palette } from 'src/components/Palette'
 import { CHARACTER_DATA } from 'src/fixtures/characters'
 import { setGameCharacter } from '../game/store'
 import { CharacterName } from './types'
@@ -19,42 +18,34 @@ export const ExpandedDetails: React.FC<ExpandedDetails> = ({
   const character = CHARACTER_DATA[characterName]
   return (
     <div className="relative">
-      <button onClick={() => setCharacter(null)}>Close</button>
+      <button
+        className="absolute top-2 right-2 p-2 m-3"
+        onClick={() => setCharacter(null)}
+      >
+        X
+      </button>
       <div key={character.name} className="p-4">
-        <div
-          className={`mx-auto flex flex-col space-y-4 p-2 rounded-s shadow-xl ${
-            character.alignment === 'light' ? 'bg-gray-200' : 'bg-gray-400'
-          }`}
-        >
-          <div className="p-2 rounded-s shadow-sm items-center">
-            <img src={character.portrait} />
-            <h2 className="text-xl font-large font-serif shadow-sm bg-gray-300">
-              {character.name}
-            </h2>
-            <table className="text-left mx-auto pd-2">
-              <tbody>
-                <tr>
-                  <td>Alignment: </td>
-                  <td>{character.alignment}</td>
-                </tr>
-                <tr>
-                  <td>Family: </td>
-                  <td>{character.family}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="p-2 rounded-s shadow-sm items-center">
+        <div className="flex flex-col p-2 pt-6 mx-auto space-y-4 bg-gray-400 rounded-md shadow-xl">
+          <div
+            className="m-auto w-80 h-80 bg-contain rounded-md"
+            style={{ backgroundImage: `url(${character.portrait})` }}
+          ></div>
+          <h2 className="font-serif text-xl text-gray-800 shadow-sm font-large">
+            {character.name}
+          </h2>
+          {/* 
+          <div className="items-center p-2 shadow-sm rounded-s">
             <Palette {...character.colors} />
-          </div>
+          </div> */}
 
-          <button onClick={() => dispatch(setGameCharacter(character.name))}>
-            Pick character
+          <button
+            onClick={() => dispatch(setGameCharacter(character.name))}
+            className="p-8 m-4 text-2xl font-bold bg-gray-200 rounded-md"
+          >
+            Pick character and Play!
           </button>
 
-          <div className="p-2 rounded-s shadow-sm items-center prose">
-            <h3>History</h3>
+          <div className="items-center p-2 shadow-sm rounded-s prose">
             <div>
               {character.description.map((d, i) => (
                 <p key={i}> {d}</p>

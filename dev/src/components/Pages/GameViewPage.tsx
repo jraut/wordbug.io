@@ -13,9 +13,8 @@ export const GameViewPage: FC<GameViewPage> = () => {
   useEffect(() => {
     dispatch(setLevel(1))
   }, [])
-  console.log({ characterName })
   return (
-    <div className="relative">
+    <div className="overflow-y-auto overflow-x-hidden relative h-screen text-white bg-gray-700">
       {characterName ? <GameArea /> : <CharacterSelectView />}
     </div>
   )

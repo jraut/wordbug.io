@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        highlight: '#123123',
+      },
       transitionProperty: {
         positioning: 'top, right, bottom, left',
         spacing: 'margin, padding',
