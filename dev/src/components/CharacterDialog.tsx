@@ -235,7 +235,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({
   const borderPadding = 2
   const borders = 'border-2 border-gray-800 rounded-md'
   return (
-    <div className="h-40 pointer-events-auto md:h-52 md:mt-2">
+    <div className="h-40 pointer-events-none md:h-52 md:mt-2">
       <div
         className={`flex items-stretch p-1 w-full h-full bg-white shadow-2xl md:p-${borderPadding} ${borders}`}
       >

@@ -7,6 +7,7 @@ import {
 } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useEffect, useState } from 'react'
+import { checkWord } from 'src/features/game/store'
 import { Grid } from 'src/features/grid/Grid'
 import { snapCenterToCursor } from 'src/features/grid/Pointer'
 import {
@@ -136,6 +137,7 @@ export const GameArea: FC<GameArea> = () => {
       dispatch(clearCheckedIds())
     }
   }
+  const words = useAppSelector((state) => state.game.checkedWords)
   const characterName = useAppSelector((state) => state.game.character)
   const character = characterName ? CHARACTER_DATA[characterName] : undefined
   const characters = useAppSelector((store) => store.grid.characters)
@@ -147,6 +149,9 @@ export const GameArea: FC<GameArea> = () => {
   const re = new RegExp(`^${word}$`, 'ig')
   const wordMatch = words1.find((dictionaryWord) => re.test(dictionaryWord))
 
+  const handleCheckWord = (word: string): void => {
+    dispatch(checkWord(word))
+  }
   useEffect(() => {
     const newLastId = checkedIds?.[checkedIds.length - 1]
     if (newLastId && newLastId !== lastId) {
@@ -208,6 +213,35 @@ export const GameArea: FC<GameArea> = () => {
         </div>
         <div className="relative top-0 left-0 z-50 w-7/12 max-w-4xl m-auto md:absolute md:w-54 md:max-w-4xl">
           <CharacterDialog character={character} />
+          <button
+            className="absolute p-10 text-gray-900 pointer-events-auto -right-0 -bottom-0"
+            onClick={() => {
+              if (wordMatch) handleCheckWord(wordMatch)
+            }}
+          >
+            <div
+              className="absolute w-full h-full border-8 border-dashed rounded-full bg-checkWord"
+              style={{
+                background:
+                  'radial-gradient(#fff, rgb(134, 200, 180), rgb(134, 200, 180))',
+              }}
+            ></div>
+            {wordMatch && (
+              <div className="absolute w-full h-full border-4 border-dashed rounded-full opacity-40 bg-checkWord animate-ping"></div>
+            )}
+            <div className="absolute flex w-full h-full">
+              <span className="m-auto">CHECK</span>
+            </div>
+          </button>
+          <button
+            className="absolute p-10 text-gray-900 pointer-events-auto right-24 -bottom-0"
+            onClick={() => dispatch(clearCheckedIds())}
+          >
+            <div className="absolute w-full h-full bg-gray-300 border-8 border-dashed rounded-full"></div>
+            <div className="absolute flex w-full h-full">
+              <span className="m-auto">EMPTY</span>
+            </div>
+          </button>
         </div>
         <div
           className="flex w-screen m-auto duration-200 overscroll-none transition-spacing"

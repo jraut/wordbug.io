@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         highlight: 'rgb(255, 61, 144)',
+        checkWord: 'rgb(134, 200, 180)',
       },
       transitionProperty: {
         positioning: 'top, right, bottom, left',

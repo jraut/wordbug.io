@@ -58,7 +58,7 @@ export const Pointer: FC<Pointer> = () => {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className="z-50 absolute h-full w-full opacity-30"
+      className="absolute z-30 w-full h-full opacity-30"
       style={{
         ...transformStyle,
         ...activeStyle,

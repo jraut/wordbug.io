@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { dialogLines } from 'src/components/CharacterDialog'
 import { DialogItem, DialogType } from 'src/fixtures/dialog'
 import { RootState } from 'src/store'
 import { CharacterName } from '../select-character/types'
@@ -7,6 +8,7 @@ interface GameState {
   character?: CharacterName
   dialogQueue: DialogItem[]
   textSpeed: number
+  checkedWords: string[]
   level: number | undefined
 }
 
@@ -26,6 +28,7 @@ const initialDialogItems: DialogItem[] = introLines.map((line) => ({
 
 const initialState: GameState = {
   character: defaultCharacter,
+  checkedWords: [],
   dialogQueue: initialDialogItems,
   textSpeed: textSpeed.normal,
   level: undefined,
@@ -49,6 +52,19 @@ export const gameSlice = createSlice({
     shiftDialogueItem: (state) => {
       state.dialogQueue.shift()
     },
+    checkWord: (state, action: PayloadAction<string>) => {
+      if (state.checkedWords.includes(action.payload) === false) {
+        state.checkedWords.push(action.payload)
+        state.dialogQueue.push({
+          type: DialogType.Word,
+          line: `"${action.payload}"? Let's see...`,
+        })
+        state.dialogQueue.push({
+          type: DialogType.Word,
+          line: dialogLines[DialogType.Word]('Aerith'),
+        })
+      }
+    },
   },
 })
 
@@ -57,6 +73,7 @@ export const {
   addDialogueItem,
   shiftDialogueItem,
   setLevel,
+  checkWord,
 } = gameSlice.actions
 
 export const selectCharacter = (state: RootState): CharacterName =>
