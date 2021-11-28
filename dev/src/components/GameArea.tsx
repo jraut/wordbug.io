@@ -114,8 +114,8 @@ const resizeFactors: Record<string, [CornerModifier, CornerModifier]> = {
 }
 
 export const GameArea: FC<GameArea> = () => {
-  const [width, setWidth] = useState(300)
-  const [height, setHeight] = useState(800)
+  const [width, setWidth] = useState(window.innerWidth * 0.75)
+  const [height, setHeight] = useState(window.innerHeight * 0.75)
   const checkedIds = useAppSelector((state) => state.grid.checkedIds)
   const [lastId, setLastId] = useState<number | undefined>()
   const dispatch = useAppDispatch()
