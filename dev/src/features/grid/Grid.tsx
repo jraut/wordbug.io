@@ -50,6 +50,7 @@ export const Square: FC<Droppable> = ({
   const { setNodeRef } = useDroppable({
     id,
   })
+  const colorWhenChecked = checked ? '' : 'bg-gray-300 text-gray-800'
   return (
     <div
       ref={setNodeRef}
@@ -63,7 +64,7 @@ export const Square: FC<Droppable> = ({
     >
       <div
         className={`flex m-auto w-full h-full
-        ${checked ? 'bg-' : 'bg-gray-300'} ${easing} ${delay}`}
+        ${colorWhenChecked} ${easing} ${delay}`}
       >
         <span className="m-auto">{char}</span>
       </div>
@@ -84,7 +85,7 @@ export const Grid: FC<Grid> = ({
   return (
     <>
       <div
-        className="flex overscroll-none relative flex-wrap mx-auto duration-700 ease-in-out inset-o transition-area"
+        className="relative flex flex-wrap mx-auto duration-700 ease-in-out overscroll-none inset-o transition-area"
         style={{
           width: `${width}px`,
           height: `${height}px`,
