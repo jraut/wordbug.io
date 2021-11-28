@@ -193,7 +193,7 @@ export const GameArea: FC<GameArea> = () => {
   }
   return (
     <>
-      <div className="overflow-hidden overscroll-none absolute top-0 left-0 justify-center w-screen h-screen direction-column">
+      <div className="absolute top-0 left-0 justify-center w-screen h-screen overflow-hidden overscroll-none direction-column">
         <div className="absolute -right-1">
           <button
             onClick={() => {
@@ -206,11 +206,11 @@ export const GameArea: FC<GameArea> = () => {
           [ {wordMatch ? `${wordMatch} is a word` : '...'} ] - word:
           <p className={`${wordMatch ? 'bg-red' : ''}`}>{word} -</p>
         </div>
-        <div className="relative top-0 left-0 z-50 m-auto w-10/12 pointer-events-none md:absolute md:w-54 xl:w-2/5">
+        <div className="relative top-0 left-0 z-50 w-7/12 max-w-4xl m-auto md:absolute md:w-54 md:max-w-4xl">
           <CharacterDialog character={character} />
         </div>
         <div
-          className="flex overscroll-none m-auto w-screen duration-200 transition-spacing"
+          className="flex w-screen m-auto duration-200 overscroll-none transition-spacing"
           style={{
             marginTop: `${(window.innerHeight - height) / 2}px`,
           }}
@@ -222,7 +222,7 @@ export const GameArea: FC<GameArea> = () => {
             collisionDetection={closestCenter}
             autoScroll={false}
           >
-            <div className="flex relative mx-auto transition-spacing transition-area">
+            <div className="relative flex mx-auto transition-spacing transition-area">
               <DraggableCorner id="tr" style={{ right: '-5em' }} />
               <DraggableCorner id="tl" style={{ left: '-5em' }} />
               <DraggableCorner id="bl" style={{ left: '-5em', bottom: 0 }} />

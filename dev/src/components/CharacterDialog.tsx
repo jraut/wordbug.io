@@ -235,9 +235,9 @@ export const CharacterDialog: FC<CharacterDialog> = ({
   const borderPadding = 2
   const borders = 'border-2 border-gray-800 rounded-md'
   return (
-    <div className="h-40 max-h-48 pointer-events-auto md:h-64 md:max-h-64 md:m-10">
+    <div className="h-40 pointer-events-auto md:h-52 md:mt-2">
       <div
-        className={`flex items-stretch p-1 w-full max-w-4xl h-full bg-white shadow-2xl md:p-${borderPadding} ${borders}`}
+        className={`flex items-stretch p-1 w-full h-full bg-white shadow-2xl md:p-${borderPadding} ${borders}`}
       >
         <div
           className={`overflow-hidden mr-1 w-1/3 md:mr-${borderPadding} ${borders}`}
@@ -245,7 +245,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({
           <div className="h-full aspect-h-1 aspect-w-1">
             <div className="flex">
               <div
-                className="m-auto w-full h-full"
+                className="w-full h-full m-auto"
                 style={{ transform: 'scaleX(-1)' }}
               >
                 <div
@@ -261,9 +261,9 @@ export const CharacterDialog: FC<CharacterDialog> = ({
         >
           <div
             ref={textScrollerRef}
-            className="overflow-x-hidden overflow-y-scroll my-auto max-h-36 md:max-h-56"
+            className="my-auto overflow-x-hidden overflow-y-scroll max-h-32 md:max-h-48"
           >
-            <div className="font-mono text-left text-gray-100 prose prose-sm md:prose-2xl">
+            <div className="font-mono prose-sm prose text-left text-gray-100 md:prose-2xl">
               {subString}
             </div>
           </div>
