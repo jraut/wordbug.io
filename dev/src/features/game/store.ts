@@ -27,7 +27,6 @@ const initialDialogItems: DialogItem[] = introLines.map((line) => ({
 }))
 
 const initialState: GameState = {
-  character: defaultCharacter,
   checkedWords: [],
   dialogQueue: initialDialogItems,
   textSpeed: textSpeed.normal,
