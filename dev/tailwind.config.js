@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        highlight: '#123123',
+        highlight: 'rgb(255, 61, 144)',
       },
       transitionProperty: {
         positioning: 'top, right, bottom, left',

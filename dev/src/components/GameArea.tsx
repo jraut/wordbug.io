@@ -91,7 +91,7 @@ export const DraggableCorner: FC<DraggableCorner> = ({ id, style }) => {
       {...listeners}
       {...attributes}
     >
-      dragme
+      <div className="p-4 border-4 border-dashed rounded-full bg-highlight"></div>
     </div>
   )
 }
