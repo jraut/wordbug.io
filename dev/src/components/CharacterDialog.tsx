@@ -90,6 +90,7 @@ const GenericLines: Dialogues = {
     'This was a very long time, but at least you got a point.',
     'You finally found another word! Too bad it took so long.',
   ],
+  [DialogType.NotAWord]: ['That is not a word!'],
 }
 
 export const CharacterLines: Record<CharacterName, Partial<Dialogues>> = {
@@ -123,6 +124,7 @@ export const dialogLines = Object.keys(DialogType).reduce<
     [DialogType.Frustrated]: () => '',
     [DialogType.Word]: () => '',
     [DialogType.WordFrustrated]: () => '',
+    [DialogType.NotAWord]: () => '',
   },
 )
 
@@ -133,7 +135,7 @@ export interface CharacterDialog {
 const messageDelayTime = 5000
 const idleMessageDelay = 10000
 const charDelayTime = 20
-const idleFrustationTreshold = 5
+const idleFrustationTreshold = 10
 // const idleSeed = 1
 
 // const idleLineRandom = new Prando(idleSeed)
@@ -143,7 +145,8 @@ export const CharacterDialog: FC<CharacterDialog> = ({
 }) => {
   const dispatch = useAppDispatch()
   const textScrollerRef = useRef<HTMLDivElement>(null)
-  const { line: nextLine } = useAppSelector(selectFirstDialogueItem) ?? {}
+  const nextDialogItem = useAppSelector(selectFirstDialogueItem) ?? undefined
+  const nextLine = nextDialogItem?.line
   const [line, setLine] = useState('...')
   const [charIndex, setcharIndex] = useState(0)
   const [delayNext, setDelayNext] = useState(false)
@@ -160,6 +163,20 @@ export const CharacterDialog: FC<CharacterDialog> = ({
       }
     } else {
       setIdle(true)
+    }
+  }, [nextLine])
+
+  useEffect(() => {
+    if (nextDialogItem) {
+      if (nextDialogItem.type == DialogType.Word) {
+        setFrustrationLevel(0)
+        setLine(nextDialogItem.line)
+        setcharIndex(0)
+      } else if (nextDialogItem.type === DialogType.NotAWord) {
+        setFrustrationLevel((level) => level + 3)
+        setLine(nextDialogItem.line)
+        setcharIndex(0)
+      }
     }
   }, [nextLine])
 

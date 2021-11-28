@@ -7,16 +7,18 @@ import {
 } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useEffect, useState } from 'react'
-import { checkWord } from 'src/features/game/store'
+import { addDialogueItem, checkWord } from 'src/features/game/store'
 import { Grid } from 'src/features/grid/Grid'
 import { snapCenterToCursor } from 'src/features/grid/Pointer'
 import {
   addCheckedId,
   clearCheckedIds,
   Dimensions,
+  setCheckedIds,
   setDimensions,
 } from 'src/features/grid/store'
 import { CHARACTER_DATA } from 'src/fixtures/characters'
+import { DialogType } from 'src/fixtures/dialog'
 import { words1 } from 'src/fixtures/words'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { CharacterDialog } from './CharacterDialog'
@@ -137,7 +139,7 @@ export const GameArea: FC<GameArea> = () => {
       dispatch(clearCheckedIds())
     }
   }
-  const words = useAppSelector((state) => state.game.checkedWords)
+  const checkedWords = useAppSelector((state) => state.game.checkedWords)
   const characterName = useAppSelector((state) => state.game.character)
   const character = characterName ? CHARACTER_DATA[characterName] : undefined
   const characters = useAppSelector((store) => store.grid.characters)
@@ -188,35 +190,34 @@ export const GameArea: FC<GameArea> = () => {
     ) {
       dispatch(addCheckedId(id))
       // setCheckedIds((checked) => [...stateCheckedIds, Number(id)])
-    } else {
-      console.log({
-        is: isAdjacentSquare(id, lastId, dimensions),
-        id,
-        checkedIds,
-      })
     }
   }
   return (
     <>
       <div className="absolute top-0 left-0 justify-center w-screen h-screen overflow-hidden overscroll-none direction-column">
         <div className="absolute -right-1">
-          <button
-            onClick={() => {
-              dispatch(clearCheckedIds())
-              setLastId(undefined)
-            }}
-          >
-            [ clear ]
-          </button>
-          [ {wordMatch ? `${wordMatch} is a word` : '...'} ] - word:
-          <p className={`${wordMatch ? 'bg-red' : ''}`}>{word} -</p>
+          {checkedWords.map((word) => (
+            <p key={word} className="p-4">
+              {word}
+            </p>
+          ))}
         </div>
         <div className="relative top-0 left-0 z-50 w-7/12 max-w-4xl m-auto md:absolute md:w-54 md:max-w-4xl">
           <CharacterDialog character={character} />
           <button
             className="absolute p-10 text-gray-900 pointer-events-auto -right-0 -bottom-0"
             onClick={() => {
-              if (wordMatch) handleCheckWord(wordMatch)
+              if (wordMatch) {
+                handleCheckWord(wordMatch)
+              } else {
+                dispatch(
+                  addDialogueItem({
+                    type: DialogType.NotAWord,
+                    line: `"${word}"? That is not a word!`,
+                  }),
+                )
+              }
+              dispatch(setCheckedIds([]))
             }}
           >
             <div

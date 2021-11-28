@@ -5,6 +5,7 @@ export enum DialogType {
   Hello = 'Hello',
   Word = 'Word',
   WordFrustrated = 'WordFrustrated',
+  NotAWord = 'NotAWord',
 }
 
 export type Dialogues = Record<DialogType, string[]>
