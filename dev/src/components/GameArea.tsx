@@ -257,7 +257,7 @@ export const GameArea: FC<GameArea> = () => {
     })
   }, [])
 
-  return true || wonGame ? (
+  return wonGame ? (
     <WinScreen />
   ) : (
     <>
