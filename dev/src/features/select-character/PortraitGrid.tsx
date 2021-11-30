@@ -1,5 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { CHARACTER_DATA } from 'src/fixtures/characters'
 import { CharacterName } from './types'
 
@@ -9,7 +8,6 @@ export interface PortraitGrid {
 }
 
 export const PortraitGrid: React.FC<PortraitGrid> = ({ setCharacter }) => {
-  const dispatch = useDispatch()
   const characters = Object.values(CHARACTER_DATA)
   return (
     <div>
@@ -19,7 +17,7 @@ export const PortraitGrid: React.FC<PortraitGrid> = ({ setCharacter }) => {
             <div key={char.name} className="p-4">
               <div
                 className="cursor-pointer"
-                onClick={() => dispatch(setCharacter(char.name))}
+                onClick={() => setCharacter(char.name)}
               >
                 <div
                   className="w-64 h-64 bg-contain rounded-md hover:border-highlight-500"
