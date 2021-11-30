@@ -40,7 +40,7 @@ export const ExpandedDetails: React.FC<ExpandedDetails> = ({
 
           <button
             onClick={() => dispatch(setGameCharacter(character.name))}
-            className="p-8 m-4 text-2xl font-bold bg-gray-200 rounded-md"
+            className="p-8 m-4 text-2xl font-bold text-gray-800 bg-gray-200 rounded-md"
           >
             Pick character and Play!
           </button>
