@@ -157,6 +157,17 @@ export const GameArea: FC<GameArea> = () => {
   const handleCheckWord = (word: string): void => {
     dispatch(checkWord(word))
   }
+
+  const wordsWithPoints = checkedWords.reduce<Record<string, number>>(
+    (memo, word) => ({
+      ...memo,
+      [word]: word.split('').reduce((wordPoints, _character, i) => {
+        return wordPoints + i * i
+      }, 0),
+    }),
+    {},
+  )
+
   useEffect(() => {
     const newLastId = checkedIds?.[checkedIds.length - 1]
     if (newLastId && newLastId !== lastId) {
@@ -178,6 +189,7 @@ export const GameArea: FC<GameArea> = () => {
 
   const blockSize = Math.min(width / nx, height / ny)
 
+  // Persist dimension change to state
   useEffect(() => {
     dispatch(setDimensions([nx, ny]))
   }, [nx, ny])
@@ -201,12 +213,23 @@ export const GameArea: FC<GameArea> = () => {
   return (
     <>
       <div className="absolute top-0 left-0 justify-center w-screen h-screen overflow-hidden overscroll-none direction-column">
-        <div className="absolute -right-1">
-          {checkedWords.map((word) => (
-            <p key={word} className="p-4">
-              {word}
-            </p>
-          ))}
+        <div className="absolute -right-10">
+          <p className="max-w-24">
+            Level 1! Now we are searching for words between{' '}
+            <span className="font-bold">{words1[0]}</span> and{' '}
+            <span className="font-bold">{words1[words1.length - 1]}</span>
+          </p>
+          {checkedWords.length === 0 ? (
+            'Your points will appear here'
+          ) : (
+            <>
+              {Object.entries(wordsWithPoints).map(([word, points]) => (
+                <p key={word} className="p-4">
+                  {word} {points}
+                </p>
+              ))}
+            </>
+          )}
         </div>
         <div className="relative top-0 left-0 z-50 w-7/12 max-w-4xl m-auto md:absolute md:w-54 md:max-w-4xl">
           <CharacterDialog character={character} />
