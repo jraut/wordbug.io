@@ -176,7 +176,7 @@ export const GameArea: FC<GameArea> = () => {
   const blockSize = Math.min(width / nx, height / ny)
 
   useEffect(() => {
-    setDimensions([nx, ny])
+    dispatch(setDimensions([nx, ny]))
   }, [nx, ny])
 
   const checkHandler = (e: DragMoveEvent): void => {
