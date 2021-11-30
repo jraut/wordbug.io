@@ -266,7 +266,6 @@ export const GameArea: FC<GameArea> = () => {
                 checkedIds={checkedIds}
                 width={width}
                 height={height}
-                dimensions={dimensions}
                 blockSize={blockSize}
               />
               <Grid
@@ -274,7 +273,6 @@ export const GameArea: FC<GameArea> = () => {
                 height={height}
                 checkedIds={checkedIds}
                 blockSize={blockSize}
-                dimensions={dimensions}
               />
             </div>
           </DndContext>

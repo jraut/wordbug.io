@@ -1,9 +1,7 @@
 import { FC } from 'react'
-import { indexToCoordinate } from 'src/components/GameArea'
 import { useAppSelector } from 'src/hooks/store'
 import { Pointer } from './Pointer'
 import { Square } from './Square'
-import { Dimensions } from './store'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Grid {
@@ -11,7 +9,6 @@ export interface Grid {
   height: number
   checkedIds: number[]
   blockSize: number //  length of a blocks side in pixels
-  dimensions: Dimensions
 }
 const easings = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out']
 const delays = [
@@ -27,13 +24,7 @@ const delays = [
 
 const nEasings = easings.length
 const nDelays = delays.length
-export const Grid: FC<Grid> = ({
-  dimensions,
-  width,
-  height,
-  checkedIds,
-  blockSize,
-}) => {
+export const Grid: FC<Grid> = ({ width, height, checkedIds, blockSize }) => {
   const characters = useAppSelector((store) => store.grid.characters)
   return (
     <>
@@ -47,7 +38,6 @@ export const Grid: FC<Grid> = ({
       >
         <Pointer />
         {characters.map((char, i) => {
-          const [left, top] = indexToCoordinate(i, dimensions)
           const easing = easings[i % nEasings]
           const delay = delays[i % nDelays]
           const checked = checkedIds.includes(i)
@@ -56,8 +46,6 @@ export const Grid: FC<Grid> = ({
               key={i}
               id={String(i)}
               dimension={blockSize}
-              top={top * blockSize}
-              left={left * blockSize}
               char={char}
               easing={easing}
               delay={delay}
