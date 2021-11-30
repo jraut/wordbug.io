@@ -159,6 +159,9 @@ export const GameArea: FC<GameArea> = () => {
     if (newLastId && newLastId !== lastId) {
       setLastId(newLastId)
     }
+    if (checkedIds.length === 0) {
+      setLastId(undefined)
+    }
   }, [checkedIds])
 
   const nx = Math.ceil(Math.sqrt((characters.length * width) / height))
