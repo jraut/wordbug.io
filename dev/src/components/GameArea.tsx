@@ -188,15 +188,18 @@ export const GameArea: FC<GameArea> = () => {
       if (newLevel > allWordlists.length) {
         setWonGame(true)
       }
-      setLevel(newLevel)
-      dispatch(
-        addDialogueItem({
-          type: DialogType.NotAWord,
-          line: `Next level! Congratulations! Here we need to find words between "${firstWord}" and  "${lastWord}".`,
-        }),
-      )
+      setLevel(() => newLevel)
     }
   }, [checkedWords])
+
+  useEffect(() => {
+    dispatch(
+      addDialogueItem({
+        type: DialogType.NotAWord,
+        line: `Next level! Congratulations! Here we need to find words between "${firstWord}" and  "${lastWord}".`,
+      }),
+    )
+  }, [level])
 
   useEffect(() => {
     const newLastId = checkedIds?.[checkedIds.length - 1]
