@@ -257,7 +257,7 @@ export const GameArea: FC<GameArea> = () => {
             collisionDetection={closestCenter}
             autoScroll={false}
           >
-            <div className="relative flex mx-auto transition-spacing transition-area">
+            <div className="relative flex mx-auto transition-spacing-area">
               <DraggableCorner id="tr" style={{ right: '-5em' }} />
               <DraggableCorner id="tl" style={{ left: '-5em' }} />
               <DraggableCorner id="bl" style={{ left: '-5em', bottom: 0 }} />

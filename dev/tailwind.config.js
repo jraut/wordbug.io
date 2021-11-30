@@ -15,6 +15,7 @@ module.exports = {
         spacing: 'margin, padding',
         width: 'width',
         area: 'width, height',
+        'spacing-area': 'width, height, margin, padding',
       },
     },
   },
