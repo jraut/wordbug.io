@@ -149,7 +149,10 @@ export const GameArea: FC<GameArea> = () => {
     .join('')
     .replace(/\*/g, '.')
   const re = new RegExp(`^${word}$`, 'ig')
-  const wordMatch = words1.find((dictionaryWord) => re.test(dictionaryWord))
+  const wordMatch = words1.find(
+    (dictionaryWord) =>
+      re.test(dictionaryWord) && !checkedWords.includes(dictionaryWord),
+  )
 
   const handleCheckWord = (word: string): void => {
     dispatch(checkWord(word))

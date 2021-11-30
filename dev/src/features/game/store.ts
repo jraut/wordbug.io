@@ -52,7 +52,9 @@ export const gameSlice = createSlice({
       state.dialogQueue.shift()
     },
     checkWord: (state, action: PayloadAction<string>) => {
-      if (state.checkedWords.includes(action.payload) === false) {
+      if (state.checkedWords.includes(action.payload)) {
+        // the word is added already found
+      } else {
         state.checkedWords.push(action.payload)
         state.dialogQueue.push({
           type: DialogType.Word,
