@@ -1,5 +1,6 @@
 import { FC } from 'react'
-import { Dimensions, Word } from 'src/features/grid/store'
+import { Word } from 'src/features/grid/store'
+import { useAppSelector } from 'src/hooks/store'
 import { indexToCoordinate } from './GameArea'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -7,7 +8,6 @@ export interface DrawLine {
   checkedIds: Word
   width: number
   height: number
-  dimensions: Dimensions
   blockSize: number
 }
 
@@ -18,9 +18,9 @@ export const DrawLine: FC<DrawLine> = ({
   checkedIds,
   width,
   height,
-  dimensions,
   blockSize,
 }) => {
+  const dimensions = useAppSelector((store) => store.grid.dimensions)
   if (checkedIds.length > 0) {
     const halfBlock = blockSize / 2
     const curvePath = checkedIds
