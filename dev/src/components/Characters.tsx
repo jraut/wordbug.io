@@ -39,12 +39,12 @@ export const Characters: FC = () => {
                   char.alignment === 'light' ? 'bg-gray-200' : 'bg-gray-400'
                 }`}
               >
-                <div className="p-2 rounded-s shadow-sm items-center">
+                <div className="items-center p-2 shadow-sm rounded-s">
                   <img src={char.portrait} />
-                  <h2 className="text-xl font-large font-serif shadow-sm bg-gray-300">
+                  <h2 className="font-serif text-xl bg-gray-300 shadow-sm font-large">
                     {char.name}
                   </h2>
-                  <table className="text-left mx-auto pd-2">
+                  <table className="mx-auto text-left pd-2">
                     <tbody>
                       <tr>
                         <td>Alignment: </td>
@@ -58,10 +58,10 @@ export const Characters: FC = () => {
                   </table>
                 </div>
 
-                <div className="p-2 rounded-s shadow-sm items-center">
+                <div className="items-center p-2 shadow-sm rounded-s">
                   <Palette {...char.colors} />
                 </div>
-                <div className="p-2 rounded-s shadow-sm items-center prose">
+                <div className="items-center p-2 prose shadow-sm rounded-s">
                   <h3>History</h3>
                   <div>
                     {char.description.map((d, i) => (

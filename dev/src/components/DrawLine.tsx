@@ -57,7 +57,7 @@ export const DrawLine: FC<DrawLine> = ({
       .join(' ')
     return (
       <svg
-        className="absolute full-w full-h pointer-events-none z-10"
+        className="absolute z-10 pointer-events-none full-w full-h"
         width={width}
         height={height}
         xmlns="http://www.w3.org/2000/svg"
