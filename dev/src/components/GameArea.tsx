@@ -8,6 +8,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { CSSProperties, FC, useEffect, useState } from 'react'
 import { addDialogueItem, checkWord } from 'src/features/game/store'
+import { WinScreen } from 'src/features/game/WinScreen'
 import { Grid } from 'src/features/grid/Grid'
 import { snapCenterToCursor } from 'src/features/grid/Pointer'
 import {
@@ -19,7 +20,7 @@ import {
 } from 'src/features/grid/store'
 import { CHARACTER_DATA } from 'src/fixtures/characters'
 import { DialogType } from 'src/fixtures/dialog'
-import { words1 } from 'src/fixtures/words'
+import { allWordlists } from 'src/fixtures/words'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { CharacterDialog } from './CharacterDialog'
 import { DrawLine } from './DrawLine'
@@ -118,6 +119,8 @@ export const GameArea: FC<GameArea> = () => {
   const [height, setHeight] = useState(window.innerHeight * 0.75)
   const checkedIds = useAppSelector((state) => state.grid.checkedIds)
   const [lastId, setLastId] = useState<number | undefined>()
+  const [level, setLevel] = useState(1)
+  const [wonGame, setWonGame] = useState(false)
   const dispatch = useAppDispatch()
   // const [checkedIds, setCheckedIds] = useState<number[]>([])
   const resizeHandler = (e: DragEndEvent): void => {
@@ -144,6 +147,8 @@ export const GameArea: FC<GameArea> = () => {
   const character = characterName ? CHARACTER_DATA[characterName] : undefined
   const characters = useAppSelector((store) => store.grid.characters)
 
+  const words1 = allWordlists[level - 1]
+
   const word = checkedIds
     .map((characterId) => characters[characterId])
     .join('')
@@ -167,6 +172,31 @@ export const GameArea: FC<GameArea> = () => {
     }),
     {},
   )
+
+  const pointsForThisLevel = 40 + level * level
+
+  const firstWord = words1[0]
+  const lastWord = words1[words1.length - 1]
+
+  useEffect(() => {
+    const points = Object.values(wordsWithPoints).reduce<number>(
+      (total, points) => total + points,
+      0,
+    )
+    if (points > pointsForThisLevel) {
+      const newLevel = level + 1
+      if (newLevel > allWordlists.length) {
+        setWonGame(true)
+      }
+      setLevel(newLevel)
+      dispatch(
+        addDialogueItem({
+          type: DialogType.NotAWord,
+          line: `Next level! Congratulations! Here we need to find words between "${firstWord}" and  "${lastWord}".`,
+        }),
+      )
+    }
+  }, [checkedWords])
 
   useEffect(() => {
     const newLastId = checkedIds?.[checkedIds.length - 1]
@@ -210,15 +240,34 @@ export const GameArea: FC<GameArea> = () => {
       // setCheckedIds((checked) => [...stateCheckedIds, Number(id)])
     }
   }
-  return (
+
+  useEffect(() => {
+    const introLines = [
+      'Welcome!',
+      `We need to find words in the dictionary between "${firstWord}" and "${lastWord}". We can do this!`,
+    ]
+
+    introLines.map((line) => {
+      dispatch(
+        addDialogueItem({
+          line,
+          type: DialogType.Random,
+        }),
+      )
+    })
+  }, [])
+
+  return true || wonGame ? (
+    <WinScreen />
+  ) : (
     <>
       <div className="absolute top-0 left-0 justify-center w-screen h-screen overflow-hidden overscroll-none direction-column">
         <div className="absolute w-32 right-2">
-          <p>Level 1! </p>
+          <p>Level {level}!</p>
           <p className="my-4">
             Now we are searching for words between{' '}
-            <span className="font-bold">{words1[0]}</span> and{' '}
-            <span className="font-bold">{words1[words1.length - 1]}</span>
+            <span className="font-bold">{firstWord}</span> and{' '}
+            <span className="font-bold">{lastWord}</span>
           </p>
           {checkedWords.length === 0 ? (
             'Your points will appear here'

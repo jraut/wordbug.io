@@ -1,9 +1,6 @@
 // prettier-ignore
 
 export const words1 = [
-  'a',
-  'a-horizon',
-  'a-ok',
   'aardvark',
   'aardwolf',
   'ab',
@@ -69871,4 +69868,14 @@ export const words7 = [
   'zymosis',
   'zymotic',
   'zymurgy',
+]
+
+export const allWordlists = [
+  words1,
+  words2,
+  words3,
+  words4,
+  words5,
+  words6,
+  words7,
 ]

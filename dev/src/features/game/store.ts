@@ -18,13 +18,8 @@ export const textSpeed = {
   quick: 10,
 }
 
-const introLines = ['Welcome!']
-
 export const defaultCharacter: CharacterName = 'Rugo'
-const initialDialogItems: DialogItem[] = introLines.map((line) => ({
-  line,
-  type: DialogType.Random,
-}))
+const initialDialogItems: DialogItem[] = []
 
 const initialState: GameState = {
   checkedWords: [],
