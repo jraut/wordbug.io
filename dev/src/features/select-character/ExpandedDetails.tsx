@@ -17,15 +17,18 @@ export const ExpandedDetails: React.FC<ExpandedDetails> = ({
   const dispatch = useDispatch()
   const character = CHARACTER_DATA[characterName]
   return (
-    <div className="relative">
+    <div className="relative max-h-96">
       <button
         className="absolute p-2 m-3 top-2 right-2"
         onClick={() => setCharacter(null)}
       >
         X
       </button>
-      <div key={character.name} className="p-4 max-h-96">
-        <div className="flex flex-col p-2 pt-6 mx-auto space-y-4 bg-gray-400 rounded-md shadow-xl">
+      <div key={character.name} className="p-4">
+        <div
+          className="flex flex-col p-2 pt-6 mx-auto space-y-4 bg-gray-400 rounded-md shadow-xl"
+          style={{ maxHeight: '90vh' }}
+        >
           <div
             className="flex-shrink-0 m-auto bg-center bg-no-repeat bg-contain rounded-md w-80 h-80"
             style={{

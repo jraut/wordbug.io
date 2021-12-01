@@ -20,8 +20,11 @@ export const PortraitGrid: React.FC<PortraitGrid> = ({ setCharacter }) => {
                 onClick={() => setCharacter(char.name)}
               >
                 <div
-                  className="w-64 h-64 bg-contain rounded-md hover:border-highlight-500"
-                  style={{ backgroundImage: `url(${char.portrait})` }}
+                  className="w-64 h-64 bg-center bg-no-repeat bg-contain rounded-md hover:border-highlight-500"
+                  style={{
+                    backgroundImage: `url(${char.portrait})`,
+                    maxHeight: '30vh',
+                  }}
                 ></div>
                 <img />
                 {/* <button
