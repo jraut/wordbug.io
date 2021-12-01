@@ -60,11 +60,13 @@ export const Navigation: FC<Navigation> = ({ routes }) => {
     </nav>
   ) : (
     // TODO: show confirmation before navigating away
-    <Link
-      to="/"
-      className={`absolute z-20 m-1 bg-gray-200 border-8 border-gray-300`}
-    >
-      BACK TO MENU
-    </Link>
+    <div className="absolute bottom-0 flex w-full pointer-events-none">
+      <Link
+        to="/"
+        className={`m-auto z-20 bg-gray-200 border-8 border-gray-300 pointer-events-auto`}
+      >
+        BACK TO MENU
+      </Link>
+    </div>
   )
 }
