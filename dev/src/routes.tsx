@@ -18,11 +18,9 @@ export const routes: Route[] = [
     element: <GameViewPage />,
     title: 'Game',
     children: [
-      { index: true, element: <GameViewPage />,
-        },
-      { path: "/game/stage/:id", element: <GameViewPage />,
-       }
-    ]
+      { index: true, element: <GameViewPage /> },
+      { path: '/game/stage/:id', element: <GameViewPage /> },
+    ],
   },
   { path: 'history', element: <LoreViewPage />, title: 'History' },
   { path: 'characters', element: <CharactersViewPage />, title: 'Characters' },
@@ -33,7 +31,7 @@ export const MenuItem: FC<Route> = ({ path, title }) => {
   const { pathname } = useLocation()
   const isActivePath = [path, `/${path}`].includes(pathname)
   // const isActivePath = [path, `/${path}`].includes(pathname)
-  return  path && title ? (
+  return path && title ? (
     <Link
       to={path}
       className={`m-1 md:m-5 p-2 ${isActivePath ? 'bg-gray-200' : ''}`}
