@@ -30004,7 +30004,6 @@ export const words3 = [
 ]
 
 export const words4 = [
-  '',
   'housework',
   'housewrecker',
   'housing',
