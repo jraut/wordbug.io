@@ -8,24 +8,33 @@ export interface Droppable {
   id: string
   dimension: number
   char: string
-  easing: string
-  delay: string
-  checked: boolean
 }
 
-export const Square: FC<Droppable> = ({
-  id,
-  dimension,
-  char,
-  easing,
-  delay,
-  checked,
-}) => {
+const easings = ['ease-linear', 'ease-in', 'ease-out', 'ease-in-out']
+const delays = [
+  'delay-75',
+  'delay-100',
+  'delay-150',
+  'delay-200',
+  'delay-300',
+  'delay-500',
+  'delay-700',
+  'delay-1000',
+]
+
+const nEasings = easings.length
+const nDelays = delays.length
+
+export const Square: FC<Droppable> = ({ id, dimension, char }) => {
   const dimensions = useAppSelector((store) => store.grid.dimensions)
+  const checked = useAppSelector((store) => store.grid.checkedIds[id])
 
   const { setNodeRef } = useDroppable({
     id,
   })
+  const i = Number(id)
+  const easing = easings[i % nEasings]
+  const delay = delays[i % nDelays]
 
   const [left, top] = indexToCoordinate(Number(id), dimensions)
   const colorWhenChecked = checked ? '' : 'bg-gray-300 text-gray-800'

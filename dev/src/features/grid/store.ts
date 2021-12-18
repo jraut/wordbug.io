@@ -20,7 +20,7 @@ const characterToSquareInfo =
 export type Dimensions = [nX: number, nY: number]
 
 interface GridState {
-  checkedIds: Word
+  checkedIds: Record<string, boolean>
   successfulWords: SuccesfulWords
   characters: string[]
   dimensions: Dimensions
@@ -40,7 +40,7 @@ export const generateLevelCharacters = (level: number): string[] => {
 }
 
 const initialState: GridState = {
-  checkedIds: [],
+  checkedIds: {},
   successfulWords: [],
   characters: [], // createLevel(),
   squares: [],
@@ -59,16 +59,11 @@ export const gridSlice = createSlice({
   name: 'grid',
   initialState,
   reducers: {
-    setCheckedIds: (state, action: PayloadAction<SquareId[]>) => {
-      if (state.checkedIds.length !== action.payload.length) {
-        state.checkedIds = action.payload
-      }
-    },
     addCheckedId: (state, action: PayloadAction<SquareId>) => {
-      state.checkedIds.push(action.payload)
+      state.checkedIds[action.payload] = true
     },
     clearCheckedIds: (state) => {
-      state.checkedIds = []
+      state.checkedIds = {}
     },
     setDimensions: (state, action: PayloadAction<Dimensions>) => {
       state.dimensions = action.payload
@@ -87,5 +82,5 @@ export const gridSlice = createSlice({
 
 export const gridReducer = gridSlice.reducer
 
-export const { setCheckedIds, addCheckedId, clearCheckedIds, setDimensions } =
+export const { addCheckedId, clearCheckedIds, setDimensions } =
   gridSlice.actions

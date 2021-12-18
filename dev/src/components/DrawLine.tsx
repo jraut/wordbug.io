@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import { Word } from 'src/features/grid/store'
 import { useAppSelector } from 'src/hooks/store'
 import { indexToCoordinate } from './GameArea'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DrawLine {
-  checkedIds: Word
+  checkedIds: number[]
   width: number
   height: number
   blockSize: number
