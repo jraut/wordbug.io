@@ -39,8 +39,9 @@ export const Grid: FC<Grid> = ({ width, height, checkedIds, blockSize }) => {
         <Pointer />
         {characters.map((char, i) => {
           const easing = easings[i % nEasings]
-          const delay = delays[i % nDelays]
+          const delay = delays[(i * Math.random()) % nDelays]
           const checked = checkedIds.includes(i)
+
           return (
             <Square
               key={i}
