@@ -280,7 +280,7 @@ export const CharacterDialog: FC<CharacterDialog> = ({
             ref={textScrollerRef}
             className="my-auto overflow-x-hidden overflow-y-scroll max-h-32 md:max-h-48"
           >
-            <div className="font-mono prose-sm prose text-left text-gray-100 md:prose-2xl">
+            <div className="font-mono prose-sm prose text-left text-gray-100 md:prose-2xl scrollbar scrollbar-none">
               {subString}
             </div>
           </div>
