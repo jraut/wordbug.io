@@ -32,7 +32,7 @@ export const Square: FC<Droppable> = ({
   return (
     <div
       ref={setNodeRef}
-      className={'flex absolute p-1 duration-700 transition-positioning'}
+      className={`flex absolute p-1 duration-700 transition-positioning ${easing} ${delay}`}
       style={{
         width: `${dimension}px`,
         height: `${dimension}px`,
@@ -42,7 +42,7 @@ export const Square: FC<Droppable> = ({
     >
       <div
         className={`flex m-auto w-full h-full
-        ${colorWhenChecked} ${easing} ${delay}`}
+        ${colorWhenChecked}`}
       >
         <span className="m-auto">{char}</span>
       </div>
